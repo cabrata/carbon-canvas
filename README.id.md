@@ -53,6 +53,20 @@ const png = render(code, { language: 'javascript' })
 fs.writeFileSync('code.png', png)
 ```
 
+### TypeScript / ESM
+
+Type definition sudah ikut di package, tidak perlu `@types`. Bisa dipakai di CommonJS, ESM, dan TypeScript.
+
+```ts
+import { render, type RenderOptions } from 'carbon-canvas'
+// atau: import carbon from 'carbon-canvas'
+
+const options: RenderOptions = { theme: 'dracula', language: 'typescript', windowTheme: 'boxy' }
+const png: Buffer = render('const x: number = 1', options)
+```
+
+ID tema, font, dan `windowTheme` muncul di autocomplete editor, dan typo seperti `windowTheme: 'round'` langsung error saat compile.
+
 Contoh dengan opsi lengkap:
 
 ```js
@@ -197,6 +211,7 @@ Key yang tidak diisi akan pakai warna `text`.
 
 ```bash
 npm test
+npm run test:types
 ```
 
 Menghasilkan contoh gambar di folder `out/`. Untuk membuat ulang preview tema jalankan `npm run themes`.

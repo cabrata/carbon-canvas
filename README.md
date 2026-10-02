@@ -53,6 +53,20 @@ const png = render(code, { language: 'javascript' })
 fs.writeFileSync('code.png', png)
 ```
 
+### TypeScript / ESM
+
+Type definitions ship with the package, no `@types` needed. Works with CommonJS, ESM, and TypeScript.
+
+```ts
+import { render, type RenderOptions } from 'carbon-canvas'
+// or: import carbon from 'carbon-canvas'
+
+const options: RenderOptions = { theme: 'dracula', language: 'typescript', windowTheme: 'boxy' }
+const png: Buffer = render('const x: number = 1', options)
+```
+
+Theme IDs, fonts, and `windowTheme` autocomplete in your editor, and a typo like `windowTheme: 'round'` fails at compile time.
+
 With all options:
 
 ```js
@@ -197,6 +211,7 @@ Missing keys fall back to the `text` color.
 
 ```bash
 npm test
+npm run test:types
 ```
 
 Writes sample images to the `out/` folder. Regenerate the theme previews with `npm run themes`.

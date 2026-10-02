@@ -209,3 +209,4 @@ function render(code, options = {}) {
 }
 
 module.exports = { render, THEMES, DEFAULTS, FONTS: Object.keys(FONTS), registerFont: (file, name) => GlobalFonts.registerFromPath(file, name) }
+module.exports.default = module.exports

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "node test.js",
-    "themes": "node scripts/themes.js"
+    "themes": "node scripts/themes.js",
+    "test:types": "tsc --noEmit --strict --module nodenext --moduleResolution nodenext --types node test-types.ts && tsc --noEmit --strict --module preserve --moduleResolution bundler --types node test-types.ts"
   },
   "keywords": [
     "carbon",
@@ -33,6 +34,22 @@
   "files": [
     "index.js",
     "themes.js",
-    "fonts"
-  ]
+    "fonts",
+    "index.d.ts",
+    "index.mjs"
+  ],
+  "types": "index.d.ts",
+  "module": "index.mjs",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.mjs",
+      "require": "./index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "typescript": "^7.0.2"
+  }
 }
