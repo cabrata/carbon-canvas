@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node test.js",
     "themes": "node scripts/themes.js",
-    "test:types": "tsc --noEmit --strict --module nodenext --moduleResolution nodenext --types node test-types.ts && tsc --noEmit --strict --module preserve --moduleResolution bundler --types node test-types.ts"
+    "test:types": "tsc --noEmit --strict --module nodenext --moduleResolution nodenext --types node test-types.ts && tsc --noEmit --strict --module preserve --moduleResolution bundler --types node test-types.ts",
+    "test:bun": "bun test ./test.bun.ts"
   },
   "keywords": [
     "carbon",

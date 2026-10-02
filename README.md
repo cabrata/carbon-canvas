@@ -35,6 +35,8 @@ Or install it straight from GitHub into your project:
 
 ```bash
 npm install github:cabrata/carbon-canvas
+# or with Bun
+bun add github:cabrata/carbon-canvas
 ```
 
 Requires Node.js 18 or newer.
@@ -55,7 +57,7 @@ fs.writeFileSync('code.png', png)
 
 ### TypeScript / ESM
 
-Type definitions ship with the package, no `@types` needed. Works with CommonJS, ESM, and TypeScript.
+Type definitions ship with the package, no `@types` needed. Works with CommonJS, ESM, TypeScript, and [Bun](https://bun.sh).
 
 ```ts
 import { render, type RenderOptions } from 'carbon-canvas'
@@ -63,6 +65,14 @@ import { render, type RenderOptions } from 'carbon-canvas'
 
 const options: RenderOptions = { theme: 'dracula', language: 'typescript', windowTheme: 'boxy' }
 const png: Buffer = render('const x: number = 1', options)
+```
+
+With Bun you can run TypeScript directly:
+
+```ts
+// index.ts -> bun index.ts
+import { render } from 'carbon-canvas'
+await Bun.write('code.png', render('console.log("bun")', { theme: 'nord' }))
 ```
 
 Theme IDs, fonts, and `windowTheme` autocomplete in your editor, and a typo like `windowTheme: 'round'` fails at compile time.
@@ -212,6 +222,7 @@ Missing keys fall back to the `text` color.
 ```bash
 npm test
 npm run test:types
+bun test ./test.bun.ts
 ```
 
 Writes sample images to the `out/` folder. Regenerate the theme previews with `npm run themes`.

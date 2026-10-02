@@ -35,6 +35,8 @@ Atau install langsung dari GitHub ke project kamu:
 
 ```bash
 npm install github:cabrata/carbon-canvas
+# atau pakai Bun
+bun add github:cabrata/carbon-canvas
 ```
 
 Butuh Node.js 18 ke atas.
@@ -55,7 +57,7 @@ fs.writeFileSync('code.png', png)
 
 ### TypeScript / ESM
 
-Type definition sudah ikut di package, tidak perlu `@types`. Bisa dipakai di CommonJS, ESM, dan TypeScript.
+Type definition sudah ikut di package, tidak perlu `@types`. Bisa dipakai di CommonJS, ESM, TypeScript, dan [Bun](https://bun.sh).
 
 ```ts
 import { render, type RenderOptions } from 'carbon-canvas'
@@ -63,6 +65,14 @@ import { render, type RenderOptions } from 'carbon-canvas'
 
 const options: RenderOptions = { theme: 'dracula', language: 'typescript', windowTheme: 'boxy' }
 const png: Buffer = render('const x: number = 1', options)
+```
+
+Dengan Bun, file TypeScript bisa langsung dijalankan:
+
+```ts
+// index.ts -> bun index.ts
+import { render } from 'carbon-canvas'
+await Bun.write('code.png', render('console.log("bun")', { theme: 'nord' }))
 ```
 
 ID tema, font, dan `windowTheme` muncul di autocomplete editor, dan typo seperti `windowTheme: 'round'` langsung error saat compile.
@@ -212,6 +222,7 @@ Key yang tidak diisi akan pakai warna `text`.
 ```bash
 npm test
 npm run test:types
+bun test ./test.bun.ts
 ```
 
 Menghasilkan contoh gambar di folder `out/`. Untuk membuat ulang preview tema jalankan `npm run themes`.
