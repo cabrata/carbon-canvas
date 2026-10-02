@@ -7,7 +7,9 @@
     "test": "node test.js",
     "themes": "node scripts/themes.js",
     "test:types": "tsc --noEmit --strict --module nodenext --moduleResolution nodenext --types node test-types.ts && tsc --noEmit --strict --module preserve --moduleResolution bundler --types node test-types.ts",
-    "test:bun": "bun test ./test.bun.ts"
+    "test:bun": "bun test ./test.bun.ts",
+    "test:docs": "node scripts/test-docs.js",
+    "test:package": "node scripts/test-package.js"
   },
   "keywords": [
     "carbon",
@@ -22,13 +24,14 @@
   "type": "commonjs",
   "dependencies": {
     "@napi-rs/canvas": "^1.0.10",
+    "@types/node": "^26.6.4",
     "highlight.js": "^11.12.0"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cabrata/carbon-canvas.git"
   },
-  "homepage": "https://github.com/cabrata/carbon-canvas#readme",
+  "homepage": "https://cabrata.github.io/carbon-canvas/",
   "engines": {
     "node": ">=18"
   },
@@ -36,21 +39,27 @@
     "index.js",
     "themes.js",
     "fonts",
+    "NOTICE",
     "index.d.ts",
+    "index.d.mts",
     "index.mjs"
   ],
   "types": "index.d.ts",
   "module": "index.mjs",
   "exports": {
     ".": {
-      "types": "./index.d.ts",
-      "import": "./index.mjs",
-      "require": "./index.js"
+      "import": {
+        "types": "./index.d.mts",
+        "default": "./index.mjs"
+      },
+      "require": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      }
     },
     "./package.json": "./package.json"
   },
   "devDependencies": {
-    "@types/node": "^26.6.4",
     "typescript": "^7.0.2"
   }
 }

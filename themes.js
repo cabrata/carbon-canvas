@@ -371,7 +371,7 @@ module.exports = [
       variable2: '#06b6ef',
       attribute: '#48b685',
       definition: '#f99b15',
-      keyword: '#ef6155;',
+      keyword: '#ef6155',
       operator: '#fff',
       property: '#48b685',
       number: '#815ba4',
