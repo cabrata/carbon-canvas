@@ -51,12 +51,12 @@ if (false) {
   carbon.render('x', { windowTheme: 'round' })
 }
 `
-  fs.writeFileSync(path.join(consumer, 'import.mts'), `import carbon, * as types from 'carbon-canvas'
-import { render } from 'carbon-canvas'
+  fs.writeFileSync(path.join(consumer, 'import.mts'), `import carbon, * as types from '${metadata.name}'
+import { render } from '${metadata.name}'
 ${checks.replaceAll('carbon.RenderOptions', 'types.RenderOptions').replaceAll('carbon.Theme', 'types.Theme')}
 assert.equal(render, carbon.render)
 `)
-  fs.writeFileSync(path.join(consumer, 'require.cts'), `import carbon = require('carbon-canvas')
+  fs.writeFileSync(path.join(consumer, 'require.cts'), `import carbon = require('${metadata.name}')
 ${checks}
 assert.equal(carbon.default, carbon)
 `)

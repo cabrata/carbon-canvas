@@ -25,10 +25,12 @@ Render pakai [`@napi-rs/canvas`](https://github.com/Brooooooklyn/canvas) (Skia, 
 
 ## Instalasi
 
+Nama package npm adalah **`@caliph71/carbon-canvas`**. Repository GitHub tetap `cabrata/carbon-canvas`.
+
 ```bash
-npm install carbon-canvas
+npm install @caliph71/carbon-canvas
 # atau pakai Bun
-bun add carbon-canvas
+bun add @caliph71/carbon-canvas
 ```
 
 Atau install langsung dari GitHub ke project kamu:
@@ -45,7 +47,7 @@ Butuh Node.js 18 ke atas.
 
 ```js
 const fs = require('fs')
-const { render } = require('carbon-canvas')
+const { render } = require('@caliph71/carbon-canvas')
 
 const code = `function hello(name) {
   return \`Hello, \${name}!\`
@@ -60,8 +62,8 @@ fs.writeFileSync('code.png', png)
 Type definition sudah ikut di package, tidak perlu `@types/carbon-canvas` terpisah. Bisa dipakai di CommonJS, ESM, TypeScript, dan [Bun](https://bun.sh).
 
 ```ts
-import { render, type RenderOptions } from 'carbon-canvas'
-// atau: import carbon from 'carbon-canvas'
+import { render, type RenderOptions } from '@caliph71/carbon-canvas'
+// atau: import carbon from '@caliph71/carbon-canvas'
 
 const options: RenderOptions = { theme: 'dracula', language: 'typescript', windowTheme: 'boxy' }
 const png: Buffer = render('const x: number = 1', options)
@@ -71,7 +73,7 @@ Dengan Bun, file TypeScript bisa langsung dijalankan:
 
 ```ts
 // index.ts -> bun index.ts
-import { render } from 'carbon-canvas'
+import { render } from '@caliph71/carbon-canvas'
 await Bun.write('code.png', render('console.log("bun")', { theme: 'nord' }))
 ```
 
@@ -105,7 +107,7 @@ const png = render(code, {
 
 ```js
 const express = require('express')
-const { render } = require('carbon-canvas')
+const { render } = require('@caliph71/carbon-canvas')
 
 const app = express()
 app.use(express.json({ limit: '16kb' }))
@@ -172,7 +174,7 @@ Array nama font bawaan.
 Daftarkan font TTF/OTF sendiri:
 
 ```js
-const { render, registerFont } = require('carbon-canvas')
+const { render, registerFont } = require('@caliph71/carbon-canvas')
 registerFont('./fonts/CascadiaCode.ttf', 'Cascadia Code')
 render(code, { fontFamily: 'Cascadia Code' })
 ```

@@ -17,7 +17,7 @@
     <nav aria-label="Project links">
       <a href="#installation">Get started</a>
       <a href="#themes">Themes</a>
-      <a href="https://www.npmjs.com/package/carbon-canvas">npm ↗</a>
+      <a href="https://www.npmjs.com/package/@caliph71/carbon-canvas">npm ↗</a>
       <a href="https://github.com/cabrata/carbon-canvas">GitHub ↗</a>
     </nav>
   </header>
@@ -56,9 +56,9 @@
 
       <section id="installation">
         <p class="eyebrow">01 / GET STARTED</p><h2>Installation</h2>
-        <p>Use Node.js 18+ or Bun. Rendering uses <a href="https://github.com/Brooooooklyn/canvas">@napi-rs/canvas</a> and syntax highlighting uses <a href="https://highlightjs.org">highlight.js</a>. Supported platforms use prebuilt native binaries.</p>
-        <div class="code-block"><div class="code-label">npm</div><pre><code>npm install carbon-canvas</code></pre><button type="button" class="copy">Copy</button></div>
-        <div class="code-block"><div class="code-label">Bun</div><pre><code>bun add carbon-canvas</code></pre><button type="button" class="copy">Copy</button></div>
+        <p>The npm package is <code>@caliph71/carbon-canvas</code>. Use Node.js 18+ or Bun. Rendering uses <a href="https://github.com/Brooooooklyn/canvas">@napi-rs/canvas</a> and syntax highlighting uses <a href="https://highlightjs.org">highlight.js</a>. Supported platforms use prebuilt native binaries.</p>
+        <div class="code-block"><div class="code-label">npm</div><pre><code>npm install @caliph71/carbon-canvas</code></pre><button type="button" class="copy">Copy</button></div>
+        <div class="code-block"><div class="code-label">Bun</div><pre><code>bun add @caliph71/carbon-canvas</code></pre><button type="button" class="copy">Copy</button></div>
         <details><summary>Install from source instead</summary><pre><code>git clone https://github.com/cabrata/carbon-canvas.git
 cd carbon-canvas
 npm install</code></pre><p>When working inside the cloned repository, use <code>require('./')</code> or <code>import … from './index.mjs'</code>.</p></details>
@@ -69,7 +69,7 @@ npm install</code></pre><p>When working inside the cloned repository, use <code>
         <p class="eyebrow">02 / YOUR FIRST IMAGE</p><h2>Quick start</h2>
         <p>Pass source code and options to <code>render()</code>. It returns a PNG <code>Buffer</code> synchronously, ready to save or send.</p>
         <div class="code-block"><div class="code-label">CommonJS · index.cjs</div><pre><code>const fs = require('node:fs')
-const { render } = require('carbon-canvas')
+const { render } = require('@caliph71/carbon-canvas')
 
 const code = `function hello(name) {
   return "Hello, " + name
@@ -91,7 +91,7 @@ fs.writeFileSync('code.png', png)</code></pre><button type="button" class="copy"
         <p class="eyebrow">03 / MODULE SUPPORT</p><h2>TypeScript &amp; ESM</h2>
         <p>Named and default imports are available. Built-in types include <code>RenderOptions</code>, <code>Theme</code>, <code>ThemeId</code>, <code>HighlightKey</code>, and <code>BuiltinFont</code>.</p>
         <div class="code-block"><div class="code-label">TypeScript</div><pre><code>import { writeFileSync } from 'node:fs'
-import { render, type RenderOptions } from 'carbon-canvas'
+import { render, type RenderOptions } from '@caliph71/carbon-canvas'
 
 const options: RenderOptions = {
   theme: 'nord',
@@ -102,7 +102,7 @@ const options: RenderOptions = {
 const png: Buffer = render('const count: number = 42', options)
 writeFileSync('code.png', png)</code></pre><button type="button" class="copy">Copy</button></div>
         <p>In a Node TypeScript project, install <code>typescript</code> and <code>@types/node</code> as dev dependencies if they are not already present. There is no separate <code>@types/carbon-canvas</code> package to install. Use <code>NodeNext</code> resolution for Node projects, or <code>bundler</code> for a compatible bundler.</p>
-        <div class="code-block"><div class="code-label">ESM · index.mjs (or a project with "type": "module")</div><pre><code>import carbon, { render } from 'carbon-canvas'
+        <div class="code-block"><div class="code-label">ESM · index.mjs (or a project with "type": "module")</div><pre><code>import carbon, { render } from '@caliph71/carbon-canvas'
 import { writeFileSync } from 'node:fs'
 
 writeFileSync('code.png', render('console.log("hello")', {
@@ -113,7 +113,7 @@ writeFileSync('code.png', render('console.log("hello")', {
 
       <section id="bun">
         <h2>Bun</h2><p>Bun can run TypeScript directly. The renderer has been tested with Bun 1.4.2 on Linux x64, including CommonJS, ESM, and all 29 themes.</p>
-        <div class="code-block"><div class="code-label">index.ts · bun index.ts</div><pre><code>import { render } from 'carbon-canvas'
+        <div class="code-block"><div class="code-label">index.ts · bun index.ts</div><pre><code>import { render } from '@caliph71/carbon-canvas'
 
 await Bun.write('code.png', render('console.log("bun")', {
   theme: 'nord',
@@ -168,7 +168,7 @@ await Bun.write('code.png', render('console.log("bun")', {
   },
 })</code></pre><button type="button" class="copy">Copy</button></div>
         <h3>Custom font</h3>
-        <div class="code-block"><div class="code-label">Node.js</div><pre><code>const { render, registerFont } = require('carbon-canvas')
+        <div class="code-block"><div class="code-label">Node.js</div><pre><code>const { render, registerFont } = require('@caliph71/carbon-canvas')
 
 registerFont('./fonts/CascadiaCode.ttf', 'Cascadia Code')
 const png = render(code, { fontFamily: 'Cascadia Code' })</code></pre><button type="button" class="copy">Copy</button></div>
@@ -178,8 +178,8 @@ const png = render(code, { fontFamily: 'Cascadia Code' })</code></pre><button ty
       <section id="examples">
         <p class="eyebrow">05 / INTEGRATION</p><h2>Send an image from an API</h2>
         <p>Rendering is synchronous. For a public endpoint, validate and cap code length, line count, and output size, and add rate limiting or a work queue. Never pass arbitrary untrusted render options straight to native canvas.</p>
-        <div class="code-block"><div class="code-label">Example · npm install express carbon-canvas</div><pre><code>const express = require('express')
-const { render } = require('carbon-canvas')
+        <div class="code-block"><div class="code-label">Example · npm install express @caliph71/carbon-canvas</div><pre><code>const express = require('express')
+const { render } = require('@caliph71/carbon-canvas')
 const app = express()
 app.use(express.json({ limit: '16kb' }))
 
@@ -739,7 +739,7 @@ app.listen(3000)</code></pre><button type="button" class="copy">Copy</button></d
           <li>No soft wrap: text wider than <code>maxWidth</code> is clipped. Increase the width or break long lines yourself.</li>
           <li>No background image or watermark support. Additional fonts can be registered locally.</li>
           <li>Carbon themes with extra CSS use only their base colors here. Effects such as SynthWave glow are not included.</li>
-          <li>Native binary availability depends on the OS and architecture supported by <code>@napi-rs/canvas</code>. Node and Bun runtime checks were run on Linux x64.</li>
+          <li>Native binary availability depends on the OS and architecture supported by <code>@napi-rs/canvas</code>. Node 18.20.8, Node 24, and Bun 1.4.2 runtime checks were run on Linux x64.</li>
         </ul>
       </section>
 

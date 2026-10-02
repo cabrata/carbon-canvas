@@ -25,10 +25,12 @@ Rendering is done with [`@napi-rs/canvas`](https://github.com/Brooooooklyn/canva
 
 ## Installation
 
+The npm package is **`@caliph71/carbon-canvas`**. The GitHub project remains `cabrata/carbon-canvas`.
+
 ```bash
-npm install carbon-canvas
+npm install @caliph71/carbon-canvas
 # or with Bun
-bun add carbon-canvas
+bun add @caliph71/carbon-canvas
 ```
 
 Alternatively, install directly from GitHub:
@@ -45,7 +47,7 @@ Requires Node.js 18 or newer.
 
 ```js
 const fs = require('fs')
-const { render } = require('carbon-canvas')
+const { render } = require('@caliph71/carbon-canvas')
 
 const code = `function hello(name) {
   return \`Hello, \${name}!\`
@@ -60,8 +62,8 @@ fs.writeFileSync('code.png', png)
 Type definitions ship with the package, no separate `@types/carbon-canvas` needed. Works with CommonJS, ESM, TypeScript, and [Bun](https://bun.sh).
 
 ```ts
-import { render, type RenderOptions } from 'carbon-canvas'
-// or: import carbon from 'carbon-canvas'
+import { render, type RenderOptions } from '@caliph71/carbon-canvas'
+// or: import carbon from '@caliph71/carbon-canvas'
 
 const options: RenderOptions = { theme: 'dracula', language: 'typescript', windowTheme: 'boxy' }
 const png: Buffer = render('const x: number = 1', options)
@@ -71,7 +73,7 @@ With Bun you can run TypeScript directly:
 
 ```ts
 // index.ts -> bun index.ts
-import { render } from 'carbon-canvas'
+import { render } from '@caliph71/carbon-canvas'
 await Bun.write('code.png', render('console.log("bun")', { theme: 'nord' }))
 ```
 
@@ -105,7 +107,7 @@ const png = render(code, {
 
 ```js
 const express = require('express')
-const { render } = require('carbon-canvas')
+const { render } = require('@caliph71/carbon-canvas')
 
 const app = express()
 app.use(express.json({ limit: '16kb' }))
@@ -172,7 +174,7 @@ Array of bundled font names.
 Register your own TTF/OTF font:
 
 ```js
-const { render, registerFont } = require('carbon-canvas')
+const { render, registerFont } = require('@caliph71/carbon-canvas')
 registerFont('./fonts/CascadiaCode.ttf', 'Cascadia Code')
 render(code, { fontFamily: 'Cascadia Code' })
 ```

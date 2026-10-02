@@ -1,6 +1,6 @@
 // Type check: npm run test:types (no emit). Also guards the .d.ts against drift.
 import fs from 'fs'
-import carbon, { render, THEMES, FONTS, DEFAULTS, type RenderOptions, type Theme } from 'carbon-canvas'
+import carbon, { render, THEMES, FONTS, DEFAULTS, type RenderOptions, type Theme } from '@caliph71/carbon-canvas'
 
 const opts: RenderOptions = { theme: 'dracula', language: 'typescript', windowTheme: 'boxy', lineNumbers: true }
 const png: Buffer = render('const x: number = 1', opts)

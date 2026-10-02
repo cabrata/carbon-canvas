@@ -1,6 +1,6 @@
 // Bun runtime check: bun test
 import { expect, test } from 'bun:test'
-import carbon, { render, THEMES, type RenderOptions } from 'carbon-canvas'
+import carbon, { render, THEMES, type RenderOptions } from '@caliph71/carbon-canvas'
 
 test('renders PNG from TypeScript under Bun', () => {
   const opts: RenderOptions = { theme: 'dracula', language: 'typescript', lineNumbers: true }
