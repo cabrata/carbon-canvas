@@ -6,12 +6,32 @@
   "scripts": {
     "test": "node test.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "carbon",
+    "code",
+    "image",
+    "canvas",
+    "syntax-highlighting",
+    "screenshot"
+  ],
+  "author": "cabrata",
+  "license": "MIT",
   "type": "commonjs",
   "dependencies": {
     "@napi-rs/canvas": "^1.0.10",
     "highlight.js": "^11.12.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cabrata/carbon-canvas.git"
+  },
+  "homepage": "https://github.com/cabrata/carbon-canvas#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "index.js",
+    "themes.js",
+    "fonts"
+  ]
 }
