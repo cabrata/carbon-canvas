@@ -1,4 +1,4 @@
-// Generates assets/themes/*.png and THEMES.md. Run: npm run themes
+// Generates docs/assets/themes/*.png, THEMES.md, and the static docs gallery.
 const fs = require('fs')
 const path = require('path')
 const { render, THEMES } = require('..')
@@ -18,11 +18,15 @@ console.log(\`fib(42) = \${fib(42)}\`, [1, 2, 3].map(x => x * 2), { ok: true })`
 
 const slug = s => s.toLowerCase().replace(/\s+/g, '-')
 const anchor = s => s.toLowerCase().replace(/[^a-z0-9 -]/g, '').replace(/ /g, '-')
+const escape = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
+const cards = []
 
-fs.mkdirSync(path.join(root, 'assets/themes'), { recursive: true })
+fs.mkdirSync(path.join(root, 'docs/assets/themes'), { recursive: true })
 let md = `# Theme Preview
 
 Previews of all **${THEMES.length} built-in themes** in carbon-canvas. Every image is rendered with the default options (Hack font, default background) and \`language: 'javascript'\`.
+
+[Web gallery](https://cabrata.github.io/carbon-canvas/#themes)
 
 \`\`\`js
 render(code, { theme: '<id>', language: 'javascript' })
@@ -36,8 +40,9 @@ ${THEMES.map(t => `| [${t.name}](#${anchor(t.name)}) | \`${t.id}\` | \`${t.highl
 
 `
 for (const t of THEMES) {
-  const file = `assets/themes/${slug(t.id)}.png`
-  fs.writeFileSync(path.join(root, file), render(code, { theme: t.id, language: 'javascript', title: t.name }))
+  const file = `docs/assets/themes/${slug(t.id)}.png`
+  const image = render(code, { theme: t.id, language: 'javascript', title: t.name })
+  fs.writeFileSync(path.join(root, file), image)
   md += `## ${t.name}
 
 ID: \`${t.id}\`
@@ -53,7 +58,23 @@ ${Object.entries(t.highlights).map(([k, v]) => `| \`${k}\` | \`${v}\` |`).join('
 </details>
 
 `
+  // Native HTML keeps the gallery usable even without JavaScript.
+  const url = file.slice('docs/'.length)
+  const swatches = Object.entries(t.highlights).map(([key, value]) => {
+    if (!/^(#[0-9a-f]{3,8}|[a-z]+|rgba?\([\d.,\s]+\))$/i.test(value)) throw new Error(`Invalid palette color: ${value}`)
+    return `<li><span class="swatch" style="background:${escape(value)}" aria-hidden="true"></span>${escape(key)} <code>${escape(value)}</code></li>`
+  }).join('\n')
+  cards.push(`<article class="theme-card" id="theme-${slug(t.id)}" data-search="${escape(`${t.name} ${t.id}`.toLowerCase())}">
+  <div class="theme-meta"><h3>${escape(t.name)}</h3><p>Theme ID: <code>${escape(t.id)}</code></p></div>
+  <a href="${url}" aria-label="View full-size ${escape(t.name)} preview"><img src="${url}" alt="JavaScript code in the ${escape(t.name)} theme" loading="lazy" decoding="async" width="${image.readUInt32BE(16)}" height="${image.readUInt32BE(20)}"></a>
+  <details><summary>Color palette</summary><ul class="palette">${swatches}</ul></details>
+</article>`)
 }
 md += 'Regenerate: `npm run themes`\n'
 fs.writeFileSync(path.join(root, 'THEMES.md'), md)
-console.log(`${THEMES.length} themes -> THEMES.md`)
+const page = path.join(root, 'docs/index.html')
+const html = fs.readFileSync(page, 'utf8')
+const marker = /<!-- themes:start -->[\s\S]*?<!-- themes:end -->/
+if (!marker.test(html)) throw new Error('Theme gallery markers missing in docs/index.html')
+fs.writeFileSync(page, html.replace(marker, `<!-- themes:start -->\n${cards.join('\n')}\n<!-- themes:end -->`))
+console.log(`${THEMES.length} themes -> THEMES.md and docs/index.html`)

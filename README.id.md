@@ -1,16 +1,16 @@
 # carbon-canvas
 
-[English](README.md) | **Bahasa Indonesia**
+[English](README.md) | **Bahasa Indonesia** | [Dokumentasi web](https://cabrata.github.io/carbon-canvas/)
 
 Bikin gambar kode cantik ala [carbon.now.sh](https://carbon.now.sh) langsung dari **Node.js**, tanpa browser, tanpa Puppeteer, tanpa Chromium.
 
 Render pakai [`@napi-rs/canvas`](https://github.com/Brooooooklyn/canvas) (Skia, prebuilt, tanpa dependency sistem) dan syntax highlight pakai [`highlight.js`](https://highlightjs.org). Tema, ukuran layout, shadow, dan window controls diambil dari source code [carbon-app/carbon](https://github.com/carbon-app/carbon).
 
-![default](assets/default.png)
+![default](docs/assets/default.png)
 
-![dracula](assets/dracula.png)
+![dracula](docs/assets/dracula.png)
 
-![one-light](assets/one-light.png)
+![one-light](docs/assets/one-light.png)
 
 ## Fitur
 
@@ -26,9 +26,9 @@ Render pakai [`@napi-rs/canvas`](https://github.com/Brooooooklyn/canvas) (Skia, 
 ## Instalasi
 
 ```bash
-git clone https://github.com/cabrata/carbon-canvas.git
-cd carbon-canvas
-npm install
+npm install carbon-canvas
+# atau pakai Bun
+bun add carbon-canvas
 ```
 
 Atau install langsung dari GitHub ke project kamu:
@@ -57,7 +57,7 @@ fs.writeFileSync('code.png', png)
 
 ### TypeScript / ESM
 
-Type definition sudah ikut di package, tidak perlu `@types`. Bisa dipakai di CommonJS, ESM, TypeScript, dan [Bun](https://bun.sh).
+Type definition sudah ikut di package, tidak perlu `@types/carbon-canvas` terpisah. Bisa dipakai di CommonJS, ESM, TypeScript, dan [Bun](https://bun.sh).
 
 ```ts
 import { render, type RenderOptions } from 'carbon-canvas'
@@ -108,18 +108,24 @@ const express = require('express')
 const { render } = require('carbon-canvas')
 
 const app = express()
-app.use(express.json({ limit: '100kb' }))
+app.use(express.json({ limit: '16kb' }))
 
 app.post('/carbon', (req, res) => {
+  const code = req.body?.code
+  if (typeof code !== 'string' || code.length > 8000 || code.split('\n').length > 100) {
+    return res.status(400).json({ error: 'Gunakan string maksimal 8000 karakter dan 100 baris' })
+  }
   try {
-    res.type('png').send(render(req.body.code, req.body.options))
-  } catch (e) {
-    res.status(400).json({ error: e.message })
+    res.type('png').send(render(code, { language: 'javascript', scale: 1 }))
+  } catch {
+    res.status(500).json({ error: 'Gagal merender gambar' })
   }
 })
 
 app.listen(3000)
 ```
+
+Untuk API publik, tambahkan autentikasi/rate limit atau antrean worker. Jangan teruskan opsi render bebas dari pengguna langsung ke native canvas.
 
 ## API
 
@@ -173,7 +179,7 @@ render(code, { fontFamily: 'Cascadia Code' })
 
 ## Tema
 
-Lihat preview semua tema di **[THEMES.md](THEMES.md)**.
+Lihat preview semua tema di **[galeri web](https://cabrata.github.io/carbon-canvas/#themes)** atau **[THEMES.md](THEMES.md)**.
 
 `3024-night`, `a11y-dark`, `blackboard`, `base16-dark`, `base16-light`, `cobalt`, `dracula`, `duotone-dark`, `hopscotch`, `lucario`, `material`, `monokai`, `night-owl`, `nord`, `oceanic-next`, `one-light`, `one-dark`, `panda-syntax`, `paraiso-dark`, `seti`, `shades-of-purple`, `solarized dark`, `solarized light`, `synthwave-84`, `twilight`, `verminal`, `vscode`, `yeti`, `zenburn`
 
@@ -219,13 +225,20 @@ Key yang tidak diisi akan pakai warna `text`.
 
 ## Test
 
+Untuk development, clone repository lalu jalankan `npm install` terlebih dahulu. Gunakan `require('./')` atau `import … from './index.mjs'` untuk memuat library lokal.
+
 ```bash
 npm test
 npm run test:types
 bun test ./test.bun.ts
+npm run test:docs
 ```
 
 Menghasilkan contoh gambar di folder `out/`. Untuk membuat ulang preview tema jalankan `npm run themes`.
+
+## GitHub Pages
+
+Situs dokumentasi statis ada di `docs/`, tanpa framework atau build. Untuk deploy fork sendiri, buka **Settings → Pages**, pilih **Deploy from a branch**, lalu **main /docs**. Semua URL aset lokal menggunakan path relatif agar tetap jalan di subpath repository.
 
 ## Kredit
 
@@ -234,4 +247,4 @@ Menghasilkan contoh gambar di folder `out/`. Untuk membuat ulang preview tema ja
 
 ## Lisensi
 
-MIT
+Library JavaScript berlisensi MIT. Font bawaan tetap memakai lisensinya masing-masing. Lihat [NOTICE](NOTICE) dan teks lisensi lengkap di `fonts/`.

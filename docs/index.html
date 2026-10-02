@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="carbon-canvas documentation. Create beautiful code images in Node.js, TypeScript, and Bun without a browser. Explore all 29 Carbon themes.">
+  <meta name="theme-color" content="#101216">
+  <title>carbon-canvas · Documentation</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="docs.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="header">
+    <a class="brand" href="#overview"><span class="logo" aria-hidden="true">&lt;/&gt;</span> carbon-canvas</a>
+    <nav aria-label="Project links">
+      <a href="#installation">Get started</a>
+      <a href="#themes">Themes</a>
+      <a href="https://www.npmjs.com/package/carbon-canvas">npm ↗</a>
+      <a href="https://github.com/cabrata/carbon-canvas">GitHub ↗</a>
+    </nav>
+  </header>
+  <div class="layout">
+    <aside class="sidebar">
+      <p class="eyebrow">DOCUMENTATION</p>
+      <nav aria-label="Documentation sections">
+        <a href="#overview">Overview</a>
+        <a href="#installation">Installation</a>
+        <a href="#quick-start">Quick start</a>
+        <a href="#typescript">TypeScript &amp; ESM</a>
+        <a href="#bun">Bun</a>
+        <a href="#api">API reference</a>
+        <a href="#customization">Customization</a>
+        <a href="#examples">Examples</a>
+        <a href="#themes">Theme gallery <span>29</span></a>
+        <a href="#limitations">Limitations</a>
+        <a href="#development">Development &amp; Pages</a>
+      </nav>
+      <div class="sidebar-note">JavaScript · TypeScript · Bun<br><a href="https://github.com/cabrata/carbon-canvas/blob/main/README.id.md" lang="id">Baca dalam Bahasa Indonesia ↗</a></div>
+    </aside>
+    <main id="main">
+      <section class="hero" id="overview">
+        <p class="eyebrow">CODE TO CANVAS. NO BROWSER REQUIRED.</p>
+        <h1>Your code,<br><span>picture perfect.</span></h1>
+        <p class="lead">Beautiful code images, straight from Node.js. Carbon-inspired themes and native canvas rendering, without Chromium, Puppeteer, or a web service.</p>
+        <div class="actions"><a class="button primary" href="#installation">Start rendering <span aria-hidden="true">→</span></a><a class="button" href="#themes">Explore 29 themes</a></div>
+        <div class="badges"><span>29 themes</span><span>3 bundled fonts</span><span>PNG Buffer</span><span>CommonJS + ESM</span><span>MIT license</span></div>
+        <figure class="hero-preview"><img src="assets/dracula.png" alt="JavaScript source code rendered with the Dracula theme, Fira Code font, and line numbers" width="1796" height="774" fetchpriority="high"><figcaption>Native Skia canvas · Dracula theme · Fira Code</figcaption></figure>
+        <div class="feature-grid">
+          <article><h3>Local by design</h3><p>Code stays in your process. No uploads, browser downloads, or runtime network requests.</p></article>
+          <article><h3>Ready for your stack</h3><p>Use <code>require</code> or <code>import</code>. Type declarations ship with the package.</p></article>
+          <article><h3>Make it yours</h3><p>Choose a theme, font, background, title, line numbers, padding, and export scale.</p></article>
+        </div>
+      </section>
+
+      <section id="installation">
+        <p class="eyebrow">01 / GET STARTED</p><h2>Installation</h2>
+        <p>Use Node.js 18+ or Bun. Rendering uses <a href="https://github.com/Brooooooklyn/canvas">@napi-rs/canvas</a> and syntax highlighting uses <a href="https://highlightjs.org">highlight.js</a>. Supported platforms use prebuilt native binaries.</p>
+        <div class="code-block"><div class="code-label">npm</div><pre><code>npm install carbon-canvas</code></pre><button type="button" class="copy">Copy</button></div>
+        <div class="code-block"><div class="code-label">Bun</div><pre><code>bun add carbon-canvas</code></pre><button type="button" class="copy">Copy</button></div>
+        <details><summary>Install from source instead</summary><pre><code>git clone https://github.com/cabrata/carbon-canvas.git
+cd carbon-canvas
+npm install</code></pre><p>When working inside the cloned repository, use <code>require('./')</code> or <code>import … from './index.mjs'</code>.</p></details>
+        <div class="callout"><strong>Server-side rendering.</strong> This website is a static documentation gallery, not an in-browser renderer. Run <code>render()</code> in Node.js or Bun, including when using it behind an API.</div>
+      </section>
+
+      <section id="quick-start">
+        <p class="eyebrow">02 / YOUR FIRST IMAGE</p><h2>Quick start</h2>
+        <p>Pass source code and options to <code>render()</code>. It returns a PNG <code>Buffer</code> synchronously, ready to save or send.</p>
+        <div class="code-block"><div class="code-label">CommonJS · index.cjs</div><pre><code>const fs = require('node:fs')
+const { render } = require('carbon-canvas')
+
+const code = `function hello(name) {
+  return "Hello, " + name
+}`
+
+const png = render(code, {
+  theme: 'dracula',
+  language: 'javascript',
+  fontFamily: 'Fira Code',
+  lineNumbers: true,
+  title: 'hello.js',
+})
+
+fs.writeFileSync('code.png', png)</code></pre><button type="button" class="copy">Copy</button></div>
+        <p>Run <code>node index.cjs</code> and find <code>code.png</code> beside it. Without options, the renderer uses Seti, Hack at 14px, 56px padding, and a 2x export.</p>
+      </section>
+
+      <section id="typescript">
+        <p class="eyebrow">03 / MODULE SUPPORT</p><h2>TypeScript &amp; ESM</h2>
+        <p>Named and default imports are available. Built-in types include <code>RenderOptions</code>, <code>Theme</code>, <code>ThemeId</code>, <code>HighlightKey</code>, and <code>BuiltinFont</code>.</p>
+        <div class="code-block"><div class="code-label">TypeScript</div><pre><code>import { writeFileSync } from 'node:fs'
+import { render, type RenderOptions } from 'carbon-canvas'
+
+const options: RenderOptions = {
+  theme: 'nord',
+  language: 'typescript',
+  windowTheme: 'boxy',
+}
+
+const png: Buffer = render('const count: number = 42', options)
+writeFileSync('code.png', png)</code></pre><button type="button" class="copy">Copy</button></div>
+        <p>In a Node TypeScript project, install <code>typescript</code> and <code>@types/node</code> as dev dependencies if they are not already present. There is no separate <code>@types/carbon-canvas</code> package to install. Use <code>NodeNext</code> resolution for Node projects, or <code>bundler</code> for a compatible bundler.</p>
+        <div class="code-block"><div class="code-label">ESM · index.mjs (or a project with "type": "module")</div><pre><code>import carbon, { render } from 'carbon-canvas'
+import { writeFileSync } from 'node:fs'
+
+writeFileSync('code.png', render('console.log("hello")', {
+  language: 'javascript',
+}))
+// carbon.render(...) works too</code></pre><button type="button" class="copy">Copy</button></div>
+      </section>
+
+      <section id="bun">
+        <h2>Bun</h2><p>Bun can run TypeScript directly. The renderer has been tested with Bun 1.4.2 on Linux x64, including CommonJS, ESM, and all 29 themes.</p>
+        <div class="code-block"><div class="code-label">index.ts · bun index.ts</div><pre><code>import { render } from 'carbon-canvas'
+
+await Bun.write('code.png', render('console.log("bun")', {
+  theme: 'nord',
+  language: 'javascript',
+}))</code></pre><button type="button" class="copy">Copy</button></div>
+      </section>
+
+      <section id="api">
+        <p class="eyebrow">04 / REFERENCE</p><h2>API reference</h2>
+        <h3><code>render(code, options?) → Buffer</code></h3>
+        <p><code>code</code> must be a string. All options are optional. An unknown theme or a non-string code argument throws an error. Dimensions are in logical pixels before applying <code>scale</code>.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Render options"><table><caption>Render options and defaults</caption><thead><tr><th scope="col">Option</th><th scope="col">Default</th><th scope="col">Description</th></tr></thead><tbody>
+          <tr><th scope="row"><code>theme</code></th><td><code>'seti'</code></td><td>Built-in theme ID or a custom <code>Theme</code> object.</td></tr>
+          <tr><th scope="row"><code>language</code></th><td><code>'auto'</code></td><td>highlight.js language name or alias, such as <code>'javascript'</code>, <code>'ts'</code>, or <code>'python'</code>. Unknown names fall back to automatic detection.</td></tr>
+          <tr><th scope="row"><code>fontFamily</code></th><td><code>'Hack'</code></td><td>Hack, Fira Code, JetBrains Mono, or a registered font.</td></tr>
+          <tr><th scope="row"><code>fontSize</code></th><td><code>14</code></td><td>Font size in pixels.</td></tr>
+          <tr><th scope="row"><code>lineHeight</code></th><td><code>1.33</code></td><td>Line height multiplier.</td></tr>
+          <tr><th scope="row"><code>lineNumbers</code></th><td><code>false</code></td><td>Display line numbers.</td></tr>
+          <tr><th scope="row"><code>firstLineNumber</code></th><td><code>1</code></td><td>Starting line number.</td></tr>
+          <tr><th scope="row"><code>windowControls</code></th><td><code>true</code></td><td>Display window controls and the title bar.</td></tr>
+          <tr><th scope="row"><code>windowTheme</code></th><td><code>'none'</code></td><td><code>'none'</code>: macOS colors, <code>'bw'</code>: outline, <code>'boxy'</code>: Windows style.</td></tr>
+          <tr><th scope="row"><code>title</code></th><td><code>''</code></td><td>Title centered in the header when window controls are enabled.</td></tr>
+          <tr><th scope="row"><code>backgroundColor</code></th><td><code>'rgba(171, 184, 195, 1)'</code></td><td>Canvas-supported color string, or <code>'transparent'</code>.</td></tr>
+          <tr><th scope="row"><code>paddingVertical</code></th><td><code>56</code></td><td>Top and bottom padding in pixels.</td></tr>
+          <tr><th scope="row"><code>paddingHorizontal</code></th><td><code>56</code></td><td>Left and right padding in pixels.</td></tr>
+          <tr><th scope="row"><code>dropShadow</code></th><td><code>true</code></td><td>Draw a shadow beneath the window.</td></tr>
+          <tr><th scope="row"><code>dropShadowOffsetY</code></th><td><code>20</code></td><td>Shadow vertical offset in pixels.</td></tr>
+          <tr><th scope="row"><code>dropShadowBlurRadius</code></th><td><code>68</code></td><td>Shadow blur radius in pixels.</td></tr>
+          <tr><th scope="row"><code>scale</code></th><td><code>2</code></td><td>Export scale, for example 1, 2, or 4.</td></tr>
+          <tr><th scope="row"><code>minWidth</code></th><td><code>90</code></td><td>Minimum code window width in pixels.</td></tr>
+          <tr><th scope="row"><code>maxWidth</code></th><td><code>1024</code></td><td>Maximum code window width. Longer lines are clipped.</td></tr>
+        </tbody></table></div>
+        <h3>Other exports</h3>
+        <dl class="exports"><dt><code>THEMES</code></dt><dd>Array of <code>{ id, name, highlights }</code> theme objects. Useful for building your own theme selector.</dd><dt><code>DEFAULTS</code></dt><dd>The default render options.</dd><dt><code>FONTS</code></dt><dd>Array of the three bundled font names.</dd><dt><code>registerFont(path, name)</code></dt><dd>Register a local TTF/OTF file under a family name. Check that the file exists before rendering.</dd></dl>
+      </section>
+
+      <section id="customization">
+        <h2>Customization</h2>
+        <h3>Custom theme</h3><p>Provide <code>id</code>, <code>highlights.background</code>, and <code>highlights.text</code>. Unspecified token colors fall back to <code>text</code>.</p>
+        <div class="code-block"><div class="code-label">JavaScript / TypeScript</div><pre><code>render(code, {
+  theme: {
+    id: 'midnight',
+    highlights: {
+      background: '#1e1e2e',
+      text: '#cdd6f4',
+      keyword: '#cba6f7',
+      string: '#a6e3a1',
+      number: '#fab387',
+      comment: '#6c7086',
+      definition: '#89b4fa',
+    },
+  },
+})</code></pre><button type="button" class="copy">Copy</button></div>
+        <h3>Custom font</h3>
+        <div class="code-block"><div class="code-label">Node.js</div><pre><code>const { render, registerFont } = require('carbon-canvas')
+
+registerFont('./fonts/CascadiaCode.ttf', 'Cascadia Code')
+const png = render(code, { fontFamily: 'Cascadia Code' })</code></pre><button type="button" class="copy">Copy</button></div>
+        <h3>Transparent background</h3><pre><code>render(code, { backgroundColor: 'transparent', dropShadow: false })</code></pre>
+      </section>
+
+      <section id="examples">
+        <p class="eyebrow">05 / INTEGRATION</p><h2>Send an image from an API</h2>
+        <p>Rendering is synchronous. For a public endpoint, validate and cap code length, line count, and output size, and add rate limiting or a work queue. Never pass arbitrary untrusted render options straight to native canvas.</p>
+        <div class="code-block"><div class="code-label">Example · npm install express carbon-canvas</div><pre><code>const express = require('express')
+const { render } = require('carbon-canvas')
+const app = express()
+app.use(express.json({ limit: '16kb' }))
+
+app.post('/carbon', (req, res) =&gt; {
+  const code = req.body?.code
+  if (typeof code !== 'string' || code.length &gt; 8000 || code.split('\n').length &gt; 100) {
+    return res.status(400).json({ error: 'Use a string of up to 8000 characters and 100 lines' })
+  }
+  try {
+    const png = render(code, { language: 'javascript', scale: 1 })
+    res.type('png').send(png)
+  } catch {
+    res.status(500).json({ error: 'Unable to render image' })
+  }
+})
+app.listen(3000)</code></pre><button type="button" class="copy">Copy</button></div>
+      </section>
+
+      <section id="themes">
+        <p class="eyebrow">06 / FIND YOUR PALETTE</p><h2>29 themes. One canvas.</h2>
+        <p>The same JavaScript snippet, rendered in every built-in theme. Click an image to see it full size, or open its color palette. Use the exact ID shown below in <code>render(code, { theme: '…' })</code>.</p>
+        <div class="theme-toolbar"><label for="theme-search">Find a theme</label><input id="theme-search" type="search" placeholder="Try Dracula, Nord, or light" aria-controls="theme-grid"><output id="theme-count" for="theme-search" aria-live="polite">29 themes</output></div>
+        <noscript><p>All theme previews are available below. Filtering and copy buttons require JavaScript.</p></noscript>
+        <p id="theme-empty" hidden>No themes match your search. Try another name or clear the search.</p>
+        <div class="theme-grid" id="theme-grid">
+          <!-- themes:start -->
+<article class="theme-card" id="theme-3024-night" data-search="3024 night 3024-night">
+  <div class="theme-meta"><h3>3024 Night</h3><p>Theme ID: <code>3024-night</code></p></div>
+  <a href="assets/themes/3024-night.png" aria-label="View full-size 3024 Night preview"><img src="assets/themes/3024-night.png" alt="JavaScript code in the 3024 Night theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#090300" aria-hidden="true"></span>background <code>#090300</code></li>
+<li><span class="swatch" style="background:#d6d5d4" aria-hidden="true"></span>text <code>#d6d5d4</code></li>
+<li><span class="swatch" style="background:#01a252" aria-hidden="true"></span>variable <code>#01a252</code></li>
+<li><span class="swatch" style="background:#01a0e4" aria-hidden="true"></span>variable2 <code>#01a0e4</code></li>
+<li><span class="swatch" style="background:#00c" aria-hidden="true"></span>attribute <code>#00c</code></li>
+<li><span class="swatch" style="background:#e8bbd0" aria-hidden="true"></span>definition <code>#e8bbd0</code></li>
+<li><span class="swatch" style="background:#db2d20" aria-hidden="true"></span>keyword <code>#db2d20</code></li>
+<li><span class="swatch" style="background:#fff" aria-hidden="true"></span>operator <code>#fff</code></li>
+<li><span class="swatch" style="background:#01a252" aria-hidden="true"></span>property <code>#01a252</code></li>
+<li><span class="swatch" style="background:#a16a94" aria-hidden="true"></span>number <code>#a16a94</code></li>
+<li><span class="swatch" style="background:#fded02" aria-hidden="true"></span>string <code>#fded02</code></li>
+<li><span class="swatch" style="background:#cdab53" aria-hidden="true"></span>comment <code>#cdab53</code></li>
+<li><span class="swatch" style="background:#555" aria-hidden="true"></span>meta <code>#555</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-a11y-dark" data-search="a11y dark a11y-dark">
+  <div class="theme-meta"><h3>A11y Dark</h3><p>Theme ID: <code>a11y-dark</code></p></div>
+  <a href="assets/themes/a11y-dark.png" aria-label="View full-size A11y Dark preview"><img src="assets/themes/a11y-dark.png" alt="JavaScript code in the A11y Dark theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#2b2b2b" aria-hidden="true"></span>background <code>#2b2b2b</code></li>
+<li><span class="swatch" style="background:#f8f8f2" aria-hidden="true"></span>text <code>#f8f8f2</code></li>
+<li><span class="swatch" style="background:#00e0e0" aria-hidden="true"></span>variable <code>#00e0e0</code></li>
+<li><span class="swatch" style="background:#abe338" aria-hidden="true"></span>attribute <code>#abe338</code></li>
+<li><span class="swatch" style="background:#ffd700" aria-hidden="true"></span>definition <code>#ffd700</code></li>
+<li><span class="swatch" style="background:#ffa07a" aria-hidden="true"></span>keyword <code>#ffa07a</code></li>
+<li><span class="swatch" style="background:#f8f8f2" aria-hidden="true"></span>operator <code>#f8f8f2</code></li>
+<li><span class="swatch" style="background:#abe338" aria-hidden="true"></span>property <code>#abe338</code></li>
+<li><span class="swatch" style="background:#dcc6e0" aria-hidden="true"></span>number <code>#dcc6e0</code></li>
+<li><span class="swatch" style="background:#ffd700" aria-hidden="true"></span>string <code>#ffd700</code></li>
+<li><span class="swatch" style="background:#d4d0ab" aria-hidden="true"></span>comment <code>#d4d0ab</code></li>
+<li><span class="swatch" style="background:#d4d0ab" aria-hidden="true"></span>meta <code>#d4d0ab</code></li>
+<li><span class="swatch" style="background:#dcc6e0" aria-hidden="true"></span>tag <code>#dcc6e0</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-blackboard" data-search="blackboard blackboard">
+  <div class="theme-meta"><h3>Blackboard</h3><p>Theme ID: <code>blackboard</code></p></div>
+  <a href="assets/themes/blackboard.png" aria-label="View full-size Blackboard preview"><img src="assets/themes/blackboard.png" alt="JavaScript code in the Blackboard theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#0C1021" aria-hidden="true"></span>background <code>#0C1021</code></li>
+<li><span class="swatch" style="background:#F8F8F8" aria-hidden="true"></span>text <code>#F8F8F8</code></li>
+<li><span class="swatch" style="background:#FF6400" aria-hidden="true"></span>variable <code>#FF6400</code></li>
+<li><span class="swatch" style="background:#8DA6CE" aria-hidden="true"></span>attribute <code>#8DA6CE</code></li>
+<li><span class="swatch" style="background:#8DA6CE" aria-hidden="true"></span>definition <code>#8DA6CE</code></li>
+<li><span class="swatch" style="background:#FBDE2D" aria-hidden="true"></span>keyword <code>#FBDE2D</code></li>
+<li><span class="swatch" style="background:#fff" aria-hidden="true"></span>operator <code>#fff</code></li>
+<li><span class="swatch" style="background:#fff" aria-hidden="true"></span>property <code>#fff</code></li>
+<li><span class="swatch" style="background:#D8FA3C" aria-hidden="true"></span>number <code>#D8FA3C</code></li>
+<li><span class="swatch" style="background:#61CE3C" aria-hidden="true"></span>string <code>#61CE3C</code></li>
+<li><span class="swatch" style="background:#AEAEAE" aria-hidden="true"></span>comment <code>#AEAEAE</code></li>
+<li><span class="swatch" style="background:#D8FA3C" aria-hidden="true"></span>meta <code>#D8FA3C</code></li>
+<li><span class="swatch" style="background:#8DA6CE" aria-hidden="true"></span>tag <code>#8DA6CE</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-base16-dark" data-search="base 16 (dark) base16-dark">
+  <div class="theme-meta"><h3>Base 16 (Dark)</h3><p>Theme ID: <code>base16-dark</code></p></div>
+  <a href="assets/themes/base16-dark.png" aria-label="View full-size Base 16 (Dark) preview"><img src="assets/themes/base16-dark.png" alt="JavaScript code in the Base 16 (Dark) theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#151515" aria-hidden="true"></span>background <code>#151515</code></li>
+<li><span class="swatch" style="background:#e0e0e0" aria-hidden="true"></span>text <code>#e0e0e0</code></li>
+<li><span class="swatch" style="background:#90a959" aria-hidden="true"></span>variable <code>#90a959</code></li>
+<li><span class="swatch" style="background:#6a9fb5" aria-hidden="true"></span>variable2 <code>#6a9fb5</code></li>
+<li><span class="swatch" style="background:#00c" aria-hidden="true"></span>attribute <code>#00c</code></li>
+<li><span class="swatch" style="background:#d28445" aria-hidden="true"></span>definition <code>#d28445</code></li>
+<li><span class="swatch" style="background:#ac4142" aria-hidden="true"></span>keyword <code>#ac4142</code></li>
+<li><span class="swatch" style="background:#fff" aria-hidden="true"></span>operator <code>#fff</code></li>
+<li><span class="swatch" style="background:#90a959" aria-hidden="true"></span>property <code>#90a959</code></li>
+<li><span class="swatch" style="background:#aa759f" aria-hidden="true"></span>number <code>#aa759f</code></li>
+<li><span class="swatch" style="background:#f4bf75" aria-hidden="true"></span>string <code>#f4bf75</code></li>
+<li><span class="swatch" style="background:#8f5536" aria-hidden="true"></span>comment <code>#8f5536</code></li>
+<li><span class="swatch" style="background:#555" aria-hidden="true"></span>meta <code>#555</code></li>
+<li><span class="swatch" style="background:#ac4142" aria-hidden="true"></span>tag <code>#ac4142</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-base16-light" data-search="base 16 (light) base16-light">
+  <div class="theme-meta"><h3>Base 16 (Light)</h3><p>Theme ID: <code>base16-light</code></p></div>
+  <a href="assets/themes/base16-light.png" aria-label="View full-size Base 16 (Light) preview"><img src="assets/themes/base16-light.png" alt="JavaScript code in the Base 16 (Light) theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#f5f5f5" aria-hidden="true"></span>background <code>#f5f5f5</code></li>
+<li><span class="swatch" style="background:#202020" aria-hidden="true"></span>text <code>#202020</code></li>
+<li><span class="swatch" style="background:#90a959" aria-hidden="true"></span>variable <code>#90a959</code></li>
+<li><span class="swatch" style="background:#6a9fb5" aria-hidden="true"></span>variable2 <code>#6a9fb5</code></li>
+<li><span class="swatch" style="background:#90a959" aria-hidden="true"></span>attribute <code>#90a959</code></li>
+<li><span class="swatch" style="background:#d28445" aria-hidden="true"></span>definition <code>#d28445</code></li>
+<li><span class="swatch" style="background:#ac4142" aria-hidden="true"></span>keyword <code>#ac4142</code></li>
+<li><span class="swatch" style="background:#000" aria-hidden="true"></span>operator <code>#000</code></li>
+<li><span class="swatch" style="background:#90a959" aria-hidden="true"></span>property <code>#90a959</code></li>
+<li><span class="swatch" style="background:#aa759f" aria-hidden="true"></span>number <code>#aa759f</code></li>
+<li><span class="swatch" style="background:#f4bf75" aria-hidden="true"></span>string <code>#f4bf75</code></li>
+<li><span class="swatch" style="background:#8f5536" aria-hidden="true"></span>comment <code>#8f5536</code></li>
+<li><span class="swatch" style="background:#555" aria-hidden="true"></span>meta <code>#555</code></li>
+<li><span class="swatch" style="background:#ac4142" aria-hidden="true"></span>tag <code>#ac4142</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-cobalt" data-search="cobalt cobalt">
+  <div class="theme-meta"><h3>Cobalt</h3><p>Theme ID: <code>cobalt</code></p></div>
+  <a href="assets/themes/cobalt.png" aria-label="View full-size Cobalt preview"><img src="assets/themes/cobalt.png" alt="JavaScript code in the Cobalt theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#002240" aria-hidden="true"></span>background <code>#002240</code></li>
+<li><span class="swatch" style="background:#fff" aria-hidden="true"></span>text <code>#fff</code></li>
+<li><span class="swatch" style="background:#9effff" aria-hidden="true"></span>variable <code>#9effff</code></li>
+<li><span class="swatch" style="background:white" aria-hidden="true"></span>variable3 <code>white</code></li>
+<li><span class="swatch" style="background:#ff80e1" aria-hidden="true"></span>attribute <code>#ff80e1</code></li>
+<li><span class="swatch" style="background:#fff" aria-hidden="true"></span>definition <code>#fff</code></li>
+<li><span class="swatch" style="background:#ffee80" aria-hidden="true"></span>keyword <code>#ffee80</code></li>
+<li><span class="swatch" style="background:#fff" aria-hidden="true"></span>operator <code>#fff</code></li>
+<li><span class="swatch" style="background:#fff" aria-hidden="true"></span>property <code>#fff</code></li>
+<li><span class="swatch" style="background:#ff80e1" aria-hidden="true"></span>number <code>#ff80e1</code></li>
+<li><span class="swatch" style="background:#3ad900" aria-hidden="true"></span>string <code>#3ad900</code></li>
+<li><span class="swatch" style="background:#08f" aria-hidden="true"></span>comment <code>#08f</code></li>
+<li><span class="swatch" style="background:#ff9d00" aria-hidden="true"></span>meta <code>#ff9d00</code></li>
+<li><span class="swatch" style="background:#9effff" aria-hidden="true"></span>tag <code>#9effff</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-dracula" data-search="dracula dracula">
+  <div class="theme-meta"><h3>Dracula</h3><p>Theme ID: <code>dracula</code></p></div>
+  <a href="assets/themes/dracula.png" aria-label="View full-size Dracula preview"><img src="assets/themes/dracula.png" alt="JavaScript code in the Dracula theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#282a36" aria-hidden="true"></span>background <code>#282a36</code></li>
+<li><span class="swatch" style="background:#f8f8f2" aria-hidden="true"></span>text <code>#f8f8f2</code></li>
+<li><span class="swatch" style="background:#50fa7b" aria-hidden="true"></span>variable <code>#50fa7b</code></li>
+<li><span class="swatch" style="background:white" aria-hidden="true"></span>variable2 <code>white</code></li>
+<li><span class="swatch" style="background:#ffb86c" aria-hidden="true"></span>variable3 <code>#ffb86c</code></li>
+<li><span class="swatch" style="background:#50fa7b" aria-hidden="true"></span>attribute <code>#50fa7b</code></li>
+<li><span class="swatch" style="background:#50fa7b" aria-hidden="true"></span>definition <code>#50fa7b</code></li>
+<li><span class="swatch" style="background:#ff79c6" aria-hidden="true"></span>keyword <code>#ff79c6</code></li>
+<li><span class="swatch" style="background:#ff79c6" aria-hidden="true"></span>operator <code>#ff79c6</code></li>
+<li><span class="swatch" style="background:#66d9ef" aria-hidden="true"></span>property <code>#66d9ef</code></li>
+<li><span class="swatch" style="background:#bd93f9" aria-hidden="true"></span>number <code>#bd93f9</code></li>
+<li><span class="swatch" style="background:#f1fa8c" aria-hidden="true"></span>string <code>#f1fa8c</code></li>
+<li><span class="swatch" style="background:#6272a4" aria-hidden="true"></span>comment <code>#6272a4</code></li>
+<li><span class="swatch" style="background:#f8f8f2" aria-hidden="true"></span>meta <code>#f8f8f2</code></li>
+<li><span class="swatch" style="background:#ff79c6" aria-hidden="true"></span>tag <code>#ff79c6</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-duotone-dark" data-search="duotone duotone-dark">
+  <div class="theme-meta"><h3>Duotone</h3><p>Theme ID: <code>duotone-dark</code></p></div>
+  <a href="assets/themes/duotone-dark.png" aria-label="View full-size Duotone preview"><img src="assets/themes/duotone-dark.png" alt="JavaScript code in the Duotone theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#2a2734" aria-hidden="true"></span>background <code>#2a2734</code></li>
+<li><span class="swatch" style="background:#6c6783" aria-hidden="true"></span>text <code>#6c6783</code></li>
+<li><span class="swatch" style="background:#ffcc99" aria-hidden="true"></span>variable <code>#ffcc99</code></li>
+<li><span class="swatch" style="background:#7a63ee" aria-hidden="true"></span>variable2 <code>#7a63ee</code></li>
+<li><span class="swatch" style="background:#7a63ee" aria-hidden="true"></span>variable3 <code>#7a63ee</code></li>
+<li><span class="swatch" style="background:#ffcc99" aria-hidden="true"></span>attribute <code>#ffcc99</code></li>
+<li><span class="swatch" style="background:#eeebff" aria-hidden="true"></span>definition <code>#eeebff</code></li>
+<li><span class="swatch" style="background:#ffcc99" aria-hidden="true"></span>keyword <code>#ffcc99</code></li>
+<li><span class="swatch" style="background:#ffad5c" aria-hidden="true"></span>operator <code>#ffad5c</code></li>
+<li><span class="swatch" style="background:#9a86fd" aria-hidden="true"></span>property <code>#9a86fd</code></li>
+<li><span class="swatch" style="background:#ffcc99" aria-hidden="true"></span>number <code>#ffcc99</code></li>
+<li><span class="swatch" style="background:#ffb870" aria-hidden="true"></span>string <code>#ffb870</code></li>
+<li><span class="swatch" style="background:#6c6783" aria-hidden="true"></span>comment <code>#6c6783</code></li>
+<li><span class="swatch" style="background:#555" aria-hidden="true"></span>meta <code>#555</code></li>
+<li><span class="swatch" style="background:#eeebff" aria-hidden="true"></span>tag <code>#eeebff</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-hopscotch" data-search="hopscotch hopscotch">
+  <div class="theme-meta"><h3>Hopscotch</h3><p>Theme ID: <code>hopscotch</code></p></div>
+  <a href="assets/themes/hopscotch.png" aria-label="View full-size Hopscotch preview"><img src="assets/themes/hopscotch.png" alt="JavaScript code in the Hopscotch theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#322931" aria-hidden="true"></span>background <code>#322931</code></li>
+<li><span class="swatch" style="background:#d5d3d5" aria-hidden="true"></span>text <code>#d5d3d5</code></li>
+<li><span class="swatch" style="background:#8fc13e" aria-hidden="true"></span>variable <code>#8fc13e</code></li>
+<li><span class="swatch" style="background:#1290bf" aria-hidden="true"></span>variable2 <code>#1290bf</code></li>
+<li><span class="swatch" style="background:#8fc13e" aria-hidden="true"></span>attribute <code>#8fc13e</code></li>
+<li><span class="swatch" style="background:#fd8b19" aria-hidden="true"></span>definition <code>#fd8b19</code></li>
+<li><span class="swatch" style="background:#dd464c" aria-hidden="true"></span>keyword <code>#dd464c</code></li>
+<li><span class="swatch" style="background:#fff" aria-hidden="true"></span>operator <code>#fff</code></li>
+<li><span class="swatch" style="background:#8fc13e" aria-hidden="true"></span>property <code>#8fc13e</code></li>
+<li><span class="swatch" style="background:#c85e7c" aria-hidden="true"></span>number <code>#c85e7c</code></li>
+<li><span class="swatch" style="background:#fdcc59" aria-hidden="true"></span>string <code>#fdcc59</code></li>
+<li><span class="swatch" style="background:#b33508" aria-hidden="true"></span>comment <code>#b33508</code></li>
+<li><span class="swatch" style="background:#555" aria-hidden="true"></span>meta <code>#555</code></li>
+<li><span class="swatch" style="background:#dd464c" aria-hidden="true"></span>tag <code>#dd464c</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-lucario" data-search="lucario lucario">
+  <div class="theme-meta"><h3>Lucario</h3><p>Theme ID: <code>lucario</code></p></div>
+  <a href="assets/themes/lucario.png" aria-label="View full-size Lucario preview"><img src="assets/themes/lucario.png" alt="JavaScript code in the Lucario theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#2b3e50" aria-hidden="true"></span>background <code>#2b3e50</code></li>
+<li><span class="swatch" style="background:#f8f8f2" aria-hidden="true"></span>text <code>#f8f8f2</code></li>
+<li><span class="swatch" style="background:#f8f8f2" aria-hidden="true"></span>variable <code>#f8f8f2</code></li>
+<li><span class="swatch" style="background:#ffb86c" aria-hidden="true"></span>variable3 <code>#ffb86c</code></li>
+<li><span class="swatch" style="background:#66D9EF" aria-hidden="true"></span>attribute <code>#66D9EF</code></li>
+<li><span class="swatch" style="background:#72C05D" aria-hidden="true"></span>definition <code>#72C05D</code></li>
+<li><span class="swatch" style="background:#ff6541" aria-hidden="true"></span>keyword <code>#ff6541</code></li>
+<li><span class="swatch" style="background:#66D9EF" aria-hidden="true"></span>operator <code>#66D9EF</code></li>
+<li><span class="swatch" style="background:#f8f8f2" aria-hidden="true"></span>property <code>#f8f8f2</code></li>
+<li><span class="swatch" style="background:#ca94ff" aria-hidden="true"></span>number <code>#ca94ff</code></li>
+<li><span class="swatch" style="background:#E6DB74" aria-hidden="true"></span>string <code>#E6DB74</code></li>
+<li><span class="swatch" style="background:#5c98cd" aria-hidden="true"></span>comment <code>#5c98cd</code></li>
+<li><span class="swatch" style="background:#f8f8f2" aria-hidden="true"></span>meta <code>#f8f8f2</code></li>
+<li><span class="swatch" style="background:#ff6541" aria-hidden="true"></span>tag <code>#ff6541</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-material" data-search="material material">
+  <div class="theme-meta"><h3>Material</h3><p>Theme ID: <code>material</code></p></div>
+  <a href="assets/themes/material.png" aria-label="View full-size Material preview"><img src="assets/themes/material.png" alt="JavaScript code in the Material theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#263238" aria-hidden="true"></span>background <code>#263238</code></li>
+<li><span class="swatch" style="background:rgba(233, 237, 237, 1)" aria-hidden="true"></span>text <code>rgba(233, 237, 237, 1)</code></li>
+<li><span class="swatch" style="background:#82B1FF" aria-hidden="true"></span>variable <code>#82B1FF</code></li>
+<li><span class="swatch" style="background:#80CBC4" aria-hidden="true"></span>variable2 <code>#80CBC4</code></li>
+<li><span class="swatch" style="background:#DECB6B" aria-hidden="true"></span>variable3 <code>#DECB6B</code></li>
+<li><span class="swatch" style="background:#FFCB6B" aria-hidden="true"></span>attribute <code>#FFCB6B</code></li>
+<li><span class="swatch" style="background:rgba(233, 237, 237, 1)" aria-hidden="true"></span>definition <code>rgba(233, 237, 237, 1)</code></li>
+<li><span class="swatch" style="background:rgba(199, 146, 234, 1)" aria-hidden="true"></span>keyword <code>rgba(199, 146, 234, 1)</code></li>
+<li><span class="swatch" style="background:rgba(233, 237, 237, 1)" aria-hidden="true"></span>operator <code>rgba(233, 237, 237, 1)</code></li>
+<li><span class="swatch" style="background:#80CBAE" aria-hidden="true"></span>property <code>#80CBAE</code></li>
+<li><span class="swatch" style="background:#F77669" aria-hidden="true"></span>number <code>#F77669</code></li>
+<li><span class="swatch" style="background:#C3E88D" aria-hidden="true"></span>string <code>#C3E88D</code></li>
+<li><span class="swatch" style="background:#546E7A" aria-hidden="true"></span>comment <code>#546E7A</code></li>
+<li><span class="swatch" style="background:#80CBC4" aria-hidden="true"></span>meta <code>#80CBC4</code></li>
+<li><span class="swatch" style="background:rgba(255, 83, 112, 1)" aria-hidden="true"></span>tag <code>rgba(255, 83, 112, 1)</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-monokai" data-search="monokai monokai">
+  <div class="theme-meta"><h3>Monokai</h3><p>Theme ID: <code>monokai</code></p></div>
+  <a href="assets/themes/monokai.png" aria-label="View full-size Monokai preview"><img src="assets/themes/monokai.png" alt="JavaScript code in the Monokai theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#272822" aria-hidden="true"></span>background <code>#272822</code></li>
+<li><span class="swatch" style="background:#f8f8f2" aria-hidden="true"></span>text <code>#f8f8f2</code></li>
+<li><span class="swatch" style="background:#f8f8f2" aria-hidden="true"></span>variable <code>#f8f8f2</code></li>
+<li><span class="swatch" style="background:#9effff" aria-hidden="true"></span>variable2 <code>#9effff</code></li>
+<li><span class="swatch" style="background:#66d9ef" aria-hidden="true"></span>variable3 <code>#66d9ef</code></li>
+<li><span class="swatch" style="background:#a6e22e" aria-hidden="true"></span>attribute <code>#a6e22e</code></li>
+<li><span class="swatch" style="background:#fd971f" aria-hidden="true"></span>definition <code>#fd971f</code></li>
+<li><span class="swatch" style="background:#f92672" aria-hidden="true"></span>keyword <code>#f92672</code></li>
+<li><span class="swatch" style="background:#fff" aria-hidden="true"></span>operator <code>#fff</code></li>
+<li><span class="swatch" style="background:#a6e22e" aria-hidden="true"></span>property <code>#a6e22e</code></li>
+<li><span class="swatch" style="background:#ae81ff" aria-hidden="true"></span>number <code>#ae81ff</code></li>
+<li><span class="swatch" style="background:#e6db74" aria-hidden="true"></span>string <code>#e6db74</code></li>
+<li><span class="swatch" style="background:#75715e" aria-hidden="true"></span>comment <code>#75715e</code></li>
+<li><span class="swatch" style="background:#555" aria-hidden="true"></span>meta <code>#555</code></li>
+<li><span class="swatch" style="background:#bc6283" aria-hidden="true"></span>tag <code>#bc6283</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-night-owl" data-search="night owl night-owl">
+  <div class="theme-meta"><h3>Night Owl</h3><p>Theme ID: <code>night-owl</code></p></div>
+  <a href="assets/themes/night-owl.png" aria-label="View full-size Night Owl preview"><img src="assets/themes/night-owl.png" alt="JavaScript code in the Night Owl theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#011627" aria-hidden="true"></span>background <code>#011627</code></li>
+<li><span class="swatch" style="background:#abb2bf" aria-hidden="true"></span>text <code>#abb2bf</code></li>
+<li><span class="swatch" style="background:#82AAFF" aria-hidden="true"></span>variable <code>#82AAFF</code></li>
+<li><span class="swatch" style="background:#F78C6C" aria-hidden="true"></span>attribute <code>#F78C6C</code></li>
+<li><span class="swatch" style="background:#82AAFF" aria-hidden="true"></span>definition <code>#82AAFF</code></li>
+<li><span class="swatch" style="background:#c792ea" aria-hidden="true"></span>keyword <code>#c792ea</code></li>
+<li><span class="swatch" style="background:#c792ea" aria-hidden="true"></span>operator <code>#c792ea</code></li>
+<li><span class="swatch" style="background:#fff" aria-hidden="true"></span>property <code>#fff</code></li>
+<li><span class="swatch" style="background:#F78C6C" aria-hidden="true"></span>number <code>#F78C6C</code></li>
+<li><span class="swatch" style="background:#ecc48d" aria-hidden="true"></span>string <code>#ecc48d</code></li>
+<li><span class="swatch" style="background:#5c6370" aria-hidden="true"></span>comment <code>#5c6370</code></li>
+<li><span class="swatch" style="background:#7fdbca" aria-hidden="true"></span>meta <code>#7fdbca</code></li>
+<li><span class="swatch" style="background:#7fdbca" aria-hidden="true"></span>tag <code>#7fdbca</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-nord" data-search="nord nord">
+  <div class="theme-meta"><h3>Nord</h3><p>Theme ID: <code>nord</code></p></div>
+  <a href="assets/themes/nord.png" aria-label="View full-size Nord preview"><img src="assets/themes/nord.png" alt="JavaScript code in the Nord theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#2e3440" aria-hidden="true"></span>background <code>#2e3440</code></li>
+<li><span class="swatch" style="background:#d8dee9" aria-hidden="true"></span>text <code>#d8dee9</code></li>
+<li><span class="swatch" style="background:#88C0D0" aria-hidden="true"></span>variable <code>#88C0D0</code></li>
+<li><span class="swatch" style="background:#d8dee9" aria-hidden="true"></span>variable3 <code>#d8dee9</code></li>
+<li><span class="swatch" style="background:#8FBCBB" aria-hidden="true"></span>attribute <code>#8FBCBB</code></li>
+<li><span class="swatch" style="background:#D8DEE9" aria-hidden="true"></span>definition <code>#D8DEE9</code></li>
+<li><span class="swatch" style="background:#81A1C1" aria-hidden="true"></span>keyword <code>#81A1C1</code></li>
+<li><span class="swatch" style="background:#81A1C1" aria-hidden="true"></span>operator <code>#81A1C1</code></li>
+<li><span class="swatch" style="background:#D8DEE9" aria-hidden="true"></span>property <code>#D8DEE9</code></li>
+<li><span class="swatch" style="background:#B48EAD" aria-hidden="true"></span>number <code>#B48EAD</code></li>
+<li><span class="swatch" style="background:#A3BE8C" aria-hidden="true"></span>string <code>#A3BE8C</code></li>
+<li><span class="swatch" style="background:#4C566A" aria-hidden="true"></span>comment <code>#4C566A</code></li>
+<li><span class="swatch" style="background:#81A1C1" aria-hidden="true"></span>meta <code>#81A1C1</code></li>
+<li><span class="swatch" style="background:#81A1C1" aria-hidden="true"></span>tag <code>#81A1C1</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-oceanic-next" data-search="oceanic next oceanic-next">
+  <div class="theme-meta"><h3>Oceanic Next</h3><p>Theme ID: <code>oceanic-next</code></p></div>
+  <a href="assets/themes/oceanic-next.png" aria-label="View full-size Oceanic Next preview"><img src="assets/themes/oceanic-next.png" alt="JavaScript code in the Oceanic Next theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#304148" aria-hidden="true"></span>background <code>#304148</code></li>
+<li><span class="swatch" style="background:#f8f8f2" aria-hidden="true"></span>text <code>#f8f8f2</code></li>
+<li><span class="swatch" style="background:#f8f8f2" aria-hidden="true"></span>variable <code>#f8f8f2</code></li>
+<li><span class="swatch" style="background:#C594C5" aria-hidden="true"></span>attribute <code>#C594C5</code></li>
+<li><span class="swatch" style="background:#6699CC" aria-hidden="true"></span>definition <code>#6699CC</code></li>
+<li><span class="swatch" style="background:#C594C5" aria-hidden="true"></span>keyword <code>#C594C5</code></li>
+<li><span class="swatch" style="background:#fff" aria-hidden="true"></span>operator <code>#fff</code></li>
+<li><span class="swatch" style="background:#99C794" aria-hidden="true"></span>property <code>#99C794</code></li>
+<li><span class="swatch" style="background:#F99157" aria-hidden="true"></span>number <code>#F99157</code></li>
+<li><span class="swatch" style="background:#99C794" aria-hidden="true"></span>string <code>#99C794</code></li>
+<li><span class="swatch" style="background:#65737E" aria-hidden="true"></span>comment <code>#65737E</code></li>
+<li><span class="swatch" style="background:#555" aria-hidden="true"></span>meta <code>#555</code></li>
+<li><span class="swatch" style="background:#C594C5" aria-hidden="true"></span>tag <code>#C594C5</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-one-light" data-search="one light one-light">
+  <div class="theme-meta"><h3>One Light</h3><p>Theme ID: <code>one-light</code></p></div>
+  <a href="assets/themes/one-light.png" aria-label="View full-size One Light preview"><img src="assets/themes/one-light.png" alt="JavaScript code in the One Light theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#fafafa" aria-hidden="true"></span>background <code>#fafafa</code></li>
+<li><span class="swatch" style="background:#383a42" aria-hidden="true"></span>text <code>#383a42</code></li>
+<li><span class="swatch" style="background:#e06c75" aria-hidden="true"></span>variable <code>#e06c75</code></li>
+<li><span class="swatch" style="background:#e45649" aria-hidden="true"></span>variable2 <code>#e45649</code></li>
+<li><span class="swatch" style="background:#d19a66" aria-hidden="true"></span>attribute <code>#d19a66</code></li>
+<li><span class="swatch" style="background:#4078f2" aria-hidden="true"></span>definition <code>#4078f2</code></li>
+<li><span class="swatch" style="background:#a626a4" aria-hidden="true"></span>keyword <code>#a626a4</code></li>
+<li><span class="swatch" style="background:#0184bc" aria-hidden="true"></span>operator <code>#0184bc</code></li>
+<li><span class="swatch" style="background:#4078f2" aria-hidden="true"></span>property <code>#4078f2</code></li>
+<li><span class="swatch" style="background:#986801" aria-hidden="true"></span>number <code>#986801</code></li>
+<li><span class="swatch" style="background:#50a14f" aria-hidden="true"></span>string <code>#50a14f</code></li>
+<li><span class="swatch" style="background:#a0a1a7" aria-hidden="true"></span>comment <code>#a0a1a7</code></li>
+<li><span class="swatch" style="background:#383a42" aria-hidden="true"></span>meta <code>#383a42</code></li>
+<li><span class="swatch" style="background:#e45649" aria-hidden="true"></span>tag <code>#e45649</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-one-dark" data-search="one dark one-dark">
+  <div class="theme-meta"><h3>One Dark</h3><p>Theme ID: <code>one-dark</code></p></div>
+  <a href="assets/themes/one-dark.png" aria-label="View full-size One Dark preview"><img src="assets/themes/one-dark.png" alt="JavaScript code in the One Dark theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#282c34" aria-hidden="true"></span>background <code>#282c34</code></li>
+<li><span class="swatch" style="background:#abb2bf" aria-hidden="true"></span>text <code>#abb2bf</code></li>
+<li><span class="swatch" style="background:#e06c75" aria-hidden="true"></span>variable <code>#e06c75</code></li>
+<li><span class="swatch" style="background:#d19a66" aria-hidden="true"></span>attribute <code>#d19a66</code></li>
+<li><span class="swatch" style="background:#e5c07b" aria-hidden="true"></span>definition <code>#e5c07b</code></li>
+<li><span class="swatch" style="background:#c678dd" aria-hidden="true"></span>keyword <code>#c678dd</code></li>
+<li><span class="swatch" style="background:#56b6c2" aria-hidden="true"></span>operator <code>#56b6c2</code></li>
+<li><span class="swatch" style="background:#56b6c2" aria-hidden="true"></span>property <code>#56b6c2</code></li>
+<li><span class="swatch" style="background:#d19a66" aria-hidden="true"></span>number <code>#d19a66</code></li>
+<li><span class="swatch" style="background:#98c379" aria-hidden="true"></span>string <code>#98c379</code></li>
+<li><span class="swatch" style="background:#5c6370" aria-hidden="true"></span>comment <code>#5c6370</code></li>
+<li><span class="swatch" style="background:#abb2bf" aria-hidden="true"></span>meta <code>#abb2bf</code></li>
+<li><span class="swatch" style="background:#e06c75" aria-hidden="true"></span>tag <code>#e06c75</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-panda-syntax" data-search="panda panda-syntax">
+  <div class="theme-meta"><h3>Panda</h3><p>Theme ID: <code>panda-syntax</code></p></div>
+  <a href="assets/themes/panda-syntax.png" aria-label="View full-size Panda preview"><img src="assets/themes/panda-syntax.png" alt="JavaScript code in the Panda theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#292A2B" aria-hidden="true"></span>background <code>#292A2B</code></li>
+<li><span class="swatch" style="background:#E6E6E6" aria-hidden="true"></span>text <code>#E6E6E6</code></li>
+<li><span class="swatch" style="background:#ffb86c" aria-hidden="true"></span>variable <code>#ffb86c</code></li>
+<li><span class="swatch" style="background:#ff9ac1" aria-hidden="true"></span>variable2 <code>#ff9ac1</code></li>
+<li><span class="swatch" style="background:#ff9ac1" aria-hidden="true"></span>variable3 <code>#ff9ac1</code></li>
+<li><span class="swatch" style="background:#ffb86c" aria-hidden="true"></span>attribute <code>#ffb86c</code></li>
+<li><span class="swatch" style="background:#e6e6e6" aria-hidden="true"></span>definition <code>#e6e6e6</code></li>
+<li><span class="swatch" style="background:#FF75B5" aria-hidden="true"></span>keyword <code>#FF75B5</code></li>
+<li><span class="swatch" style="background:#f3f3f3" aria-hidden="true"></span>operator <code>#f3f3f3</code></li>
+<li><span class="swatch" style="background:#f3f3f3" aria-hidden="true"></span>property <code>#f3f3f3</code></li>
+<li><span class="swatch" style="background:#FFB86C" aria-hidden="true"></span>number <code>#FFB86C</code></li>
+<li><span class="swatch" style="background:#19F9D8" aria-hidden="true"></span>string <code>#19F9D8</code></li>
+<li><span class="swatch" style="background:#676B79" aria-hidden="true"></span>comment <code>#676B79</code></li>
+<li><span class="swatch" style="background:#b084eb" aria-hidden="true"></span>meta <code>#b084eb</code></li>
+<li><span class="swatch" style="background:#ff2c6d" aria-hidden="true"></span>tag <code>#ff2c6d</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-paraiso-dark" data-search="paraiso paraiso-dark">
+  <div class="theme-meta"><h3>Paraiso</h3><p>Theme ID: <code>paraiso-dark</code></p></div>
+  <a href="assets/themes/paraiso-dark.png" aria-label="View full-size Paraiso preview"><img src="assets/themes/paraiso-dark.png" alt="JavaScript code in the Paraiso theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#2f1e2e" aria-hidden="true"></span>background <code>#2f1e2e</code></li>
+<li><span class="swatch" style="background:#b9b6b0" aria-hidden="true"></span>text <code>#b9b6b0</code></li>
+<li><span class="swatch" style="background:#48b685" aria-hidden="true"></span>variable <code>#48b685</code></li>
+<li><span class="swatch" style="background:#06b6ef" aria-hidden="true"></span>variable2 <code>#06b6ef</code></li>
+<li><span class="swatch" style="background:#48b685" aria-hidden="true"></span>attribute <code>#48b685</code></li>
+<li><span class="swatch" style="background:#f99b15" aria-hidden="true"></span>definition <code>#f99b15</code></li>
+<li><span class="swatch" style="background:#ef6155" aria-hidden="true"></span>keyword <code>#ef6155</code></li>
+<li><span class="swatch" style="background:#fff" aria-hidden="true"></span>operator <code>#fff</code></li>
+<li><span class="swatch" style="background:#48b685" aria-hidden="true"></span>property <code>#48b685</code></li>
+<li><span class="swatch" style="background:#815ba4" aria-hidden="true"></span>number <code>#815ba4</code></li>
+<li><span class="swatch" style="background:#fec418" aria-hidden="true"></span>string <code>#fec418</code></li>
+<li><span class="swatch" style="background:#e96ba8" aria-hidden="true"></span>comment <code>#e96ba8</code></li>
+<li><span class="swatch" style="background:#555" aria-hidden="true"></span>meta <code>#555</code></li>
+<li><span class="swatch" style="background:#ef6155" aria-hidden="true"></span>tag <code>#ef6155</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-seti" data-search="seti seti">
+  <div class="theme-meta"><h3>Seti</h3><p>Theme ID: <code>seti</code></p></div>
+  <a href="assets/themes/seti.png" aria-label="View full-size Seti preview"><img src="assets/themes/seti.png" alt="JavaScript code in the Seti theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#151718" aria-hidden="true"></span>background <code>#151718</code></li>
+<li><span class="swatch" style="background:#CFD2D1" aria-hidden="true"></span>text <code>#CFD2D1</code></li>
+<li><span class="swatch" style="background:#55b5db" aria-hidden="true"></span>variable <code>#55b5db</code></li>
+<li><span class="swatch" style="background:#a074c4" aria-hidden="true"></span>variable2 <code>#a074c4</code></li>
+<li><span class="swatch" style="background:#9fca56" aria-hidden="true"></span>variable3 <code>#9fca56</code></li>
+<li><span class="swatch" style="background:#9fca56" aria-hidden="true"></span>attribute <code>#9fca56</code></li>
+<li><span class="swatch" style="background:#55b5db" aria-hidden="true"></span>definition <code>#55b5db</code></li>
+<li><span class="swatch" style="background:#e6cd69" aria-hidden="true"></span>keyword <code>#e6cd69</code></li>
+<li><span class="swatch" style="background:#9fca56" aria-hidden="true"></span>operator <code>#9fca56</code></li>
+<li><span class="swatch" style="background:#a074c4" aria-hidden="true"></span>property <code>#a074c4</code></li>
+<li><span class="swatch" style="background:#cd3f45" aria-hidden="true"></span>number <code>#cd3f45</code></li>
+<li><span class="swatch" style="background:#55b5db" aria-hidden="true"></span>string <code>#55b5db</code></li>
+<li><span class="swatch" style="background:#41535b" aria-hidden="true"></span>comment <code>#41535b</code></li>
+<li><span class="swatch" style="background:#55b5db" aria-hidden="true"></span>meta <code>#55b5db</code></li>
+<li><span class="swatch" style="background:#55b5db" aria-hidden="true"></span>tag <code>#55b5db</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-shades-of-purple" data-search="shades of purple  shades-of-purple">
+  <div class="theme-meta"><h3>Shades of Purple </h3><p>Theme ID: <code>shades-of-purple</code></p></div>
+  <a href="assets/themes/shades-of-purple.png" aria-label="View full-size Shades of Purple  preview"><img src="assets/themes/shades-of-purple.png" alt="JavaScript code in the Shades of Purple  theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#2D2B55" aria-hidden="true"></span>background <code>#2D2B55</code></li>
+<li><span class="swatch" style="background:#FFFFFF" aria-hidden="true"></span>text <code>#FFFFFF</code></li>
+<li><span class="swatch" style="background:#9EFFFF" aria-hidden="true"></span>variable <code>#9EFFFF</code></li>
+<li><span class="swatch" style="background:#9EFFFF" aria-hidden="true"></span>attribute <code>#9EFFFF</code></li>
+<li><span class="swatch" style="background:#9EFFFF" aria-hidden="true"></span>definition <code>#9EFFFF</code></li>
+<li><span class="swatch" style="background:#FF9D00" aria-hidden="true"></span>keyword <code>#FF9D00</code></li>
+<li><span class="swatch" style="background:#FF9D00" aria-hidden="true"></span>operator <code>#FF9D00</code></li>
+<li><span class="swatch" style="background:#FAD000" aria-hidden="true"></span>property <code>#FAD000</code></li>
+<li><span class="swatch" style="background:#FF628C" aria-hidden="true"></span>number <code>#FF628C</code></li>
+<li><span class="swatch" style="background:#A5FF90" aria-hidden="true"></span>string <code>#A5FF90</code></li>
+<li><span class="swatch" style="background:#B362FF" aria-hidden="true"></span>comment <code>#B362FF</code></li>
+<li><span class="swatch" style="background:#FF9D00" aria-hidden="true"></span>meta <code>#FF9D00</code></li>
+<li><span class="swatch" style="background:#9EFFFF" aria-hidden="true"></span>tag <code>#9EFFFF</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-solarized-dark" data-search="solarized (dark) solarized dark">
+  <div class="theme-meta"><h3>Solarized (Dark)</h3><p>Theme ID: <code>solarized dark</code></p></div>
+  <a href="assets/themes/solarized-dark.png" aria-label="View full-size Solarized (Dark) preview"><img src="assets/themes/solarized-dark.png" alt="JavaScript code in the Solarized (Dark) theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#002b36" aria-hidden="true"></span>background <code>#002b36</code></li>
+<li><span class="swatch" style="background:#839496" aria-hidden="true"></span>text <code>#839496</code></li>
+<li><span class="swatch" style="background:#839496" aria-hidden="true"></span>variable <code>#839496</code></li>
+<li><span class="swatch" style="background:#b58900" aria-hidden="true"></span>variable2 <code>#b58900</code></li>
+<li><span class="swatch" style="background:#6c71c4" aria-hidden="true"></span>variable3 <code>#6c71c4</code></li>
+<li><span class="swatch" style="background:#2aa198" aria-hidden="true"></span>attribute <code>#2aa198</code></li>
+<li><span class="swatch" style="background:#2aa198" aria-hidden="true"></span>definition <code>#2aa198</code></li>
+<li><span class="swatch" style="background:#cb4b16" aria-hidden="true"></span>keyword <code>#cb4b16</code></li>
+<li><span class="swatch" style="background:#6c71c4" aria-hidden="true"></span>operator <code>#6c71c4</code></li>
+<li><span class="swatch" style="background:#2aa198" aria-hidden="true"></span>property <code>#2aa198</code></li>
+<li><span class="swatch" style="background:#d33682" aria-hidden="true"></span>number <code>#d33682</code></li>
+<li><span class="swatch" style="background:#859900" aria-hidden="true"></span>string <code>#859900</code></li>
+<li><span class="swatch" style="background:#586e75" aria-hidden="true"></span>comment <code>#586e75</code></li>
+<li><span class="swatch" style="background:#859900" aria-hidden="true"></span>meta <code>#859900</code></li>
+<li><span class="swatch" style="background:#93a1a1" aria-hidden="true"></span>tag <code>#93a1a1</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-solarized-light" data-search="solarized (light) solarized light">
+  <div class="theme-meta"><h3>Solarized (Light)</h3><p>Theme ID: <code>solarized light</code></p></div>
+  <a href="assets/themes/solarized-light.png" aria-label="View full-size Solarized (Light) preview"><img src="assets/themes/solarized-light.png" alt="JavaScript code in the Solarized (Light) theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#fdf6e3" aria-hidden="true"></span>background <code>#fdf6e3</code></li>
+<li><span class="swatch" style="background:#657b83" aria-hidden="true"></span>text <code>#657b83</code></li>
+<li><span class="swatch" style="background:#839496" aria-hidden="true"></span>variable <code>#839496</code></li>
+<li><span class="swatch" style="background:#b58900" aria-hidden="true"></span>variable2 <code>#b58900</code></li>
+<li><span class="swatch" style="background:#6c71c4" aria-hidden="true"></span>variable3 <code>#6c71c4</code></li>
+<li><span class="swatch" style="background:#2aa198" aria-hidden="true"></span>attribute <code>#2aa198</code></li>
+<li><span class="swatch" style="background:#2aa198" aria-hidden="true"></span>definition <code>#2aa198</code></li>
+<li><span class="swatch" style="background:#cb4b16" aria-hidden="true"></span>keyword <code>#cb4b16</code></li>
+<li><span class="swatch" style="background:#6c71c4" aria-hidden="true"></span>operator <code>#6c71c4</code></li>
+<li><span class="swatch" style="background:#2aa198" aria-hidden="true"></span>property <code>#2aa198</code></li>
+<li><span class="swatch" style="background:#d33682" aria-hidden="true"></span>number <code>#d33682</code></li>
+<li><span class="swatch" style="background:#859900" aria-hidden="true"></span>string <code>#859900</code></li>
+<li><span class="swatch" style="background:#586e75" aria-hidden="true"></span>comment <code>#586e75</code></li>
+<li><span class="swatch" style="background:#859900" aria-hidden="true"></span>meta <code>#859900</code></li>
+<li><span class="swatch" style="background:#93a1a1" aria-hidden="true"></span>tag <code>#93a1a1</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-synthwave-84" data-search="synthwave &#39;84 synthwave-84">
+  <div class="theme-meta"><h3>SynthWave &#39;84</h3><p>Theme ID: <code>synthwave-84</code></p></div>
+  <a href="assets/themes/synthwave-84.png" aria-label="View full-size SynthWave &#39;84 preview"><img src="assets/themes/synthwave-84.png" alt="JavaScript code in the SynthWave &#39;84 theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#2b213a" aria-hidden="true"></span>background <code>#2b213a</code></li>
+<li><span class="swatch" style="background:#b6b1b1" aria-hidden="true"></span>text <code>#b6b1b1</code></li>
+<li><span class="swatch" style="background:#f92aad" aria-hidden="true"></span>variable <code>#f92aad</code></li>
+<li><span class="swatch" style="background:#fff5f6" aria-hidden="true"></span>attribute <code>#fff5f6</code></li>
+<li><span class="swatch" style="background:#fdfdfd" aria-hidden="true"></span>definition <code>#fdfdfd</code></li>
+<li><span class="swatch" style="background:#f4eee4" aria-hidden="true"></span>keyword <code>#f4eee4</code></li>
+<li><span class="swatch" style="background:#f4eee4" aria-hidden="true"></span>operator <code>#f4eee4</code></li>
+<li><span class="swatch" style="background:#fdfdfd" aria-hidden="true"></span>property <code>#fdfdfd</code></li>
+<li><span class="swatch" style="background:#f97e72" aria-hidden="true"></span>number <code>#f97e72</code></li>
+<li><span class="swatch" style="background:#ff8b39" aria-hidden="true"></span>string <code>#ff8b39</code></li>
+<li><span class="swatch" style="background:#6d77b3" aria-hidden="true"></span>comment <code>#6d77b3</code></li>
+<li><span class="swatch" style="background:#ff8b39" aria-hidden="true"></span>meta <code>#ff8b39</code></li>
+<li><span class="swatch" style="background:#f92aad" aria-hidden="true"></span>tag <code>#f92aad</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-twilight" data-search="twilight twilight">
+  <div class="theme-meta"><h3>Twilight</h3><p>Theme ID: <code>twilight</code></p></div>
+  <a href="assets/themes/twilight.png" aria-label="View full-size Twilight preview"><img src="assets/themes/twilight.png" alt="JavaScript code in the Twilight theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#141414" aria-hidden="true"></span>background <code>#141414</code></li>
+<li><span class="swatch" style="background:#f7f7f7" aria-hidden="true"></span>text <code>#f7f7f7</code></li>
+<li><span class="swatch" style="background:#607392" aria-hidden="true"></span>variable <code>#607392</code></li>
+<li><span class="swatch" style="background:#d6bb6d" aria-hidden="true"></span>attribute <code>#d6bb6d</code></li>
+<li><span class="swatch" style="background:#607392" aria-hidden="true"></span>definition <code>#607392</code></li>
+<li><span class="swatch" style="background:#f9ee98" aria-hidden="true"></span>keyword <code>#f9ee98</code></li>
+<li><span class="swatch" style="background:#cda869" aria-hidden="true"></span>operator <code>#cda869</code></li>
+<li><span class="swatch" style="background:#fff" aria-hidden="true"></span>property <code>#fff</code></li>
+<li><span class="swatch" style="background:#ca7841" aria-hidden="true"></span>number <code>#ca7841</code></li>
+<li><span class="swatch" style="background:#8f9d6a" aria-hidden="true"></span>string <code>#8f9d6a</code></li>
+<li><span class="swatch" style="background:#777" aria-hidden="true"></span>comment <code>#777</code></li>
+<li><span class="swatch" style="background:#f7f7f7" aria-hidden="true"></span>meta <code>#f7f7f7</code></li>
+<li><span class="swatch" style="background:#997643" aria-hidden="true"></span>tag <code>#997643</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-verminal" data-search="verminal verminal">
+  <div class="theme-meta"><h3>Verminal</h3><p>Theme ID: <code>verminal</code></p></div>
+  <a href="assets/themes/verminal.png" aria-label="View full-size Verminal preview"><img src="assets/themes/verminal.png" alt="JavaScript code in the Verminal theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:rgba(0, 0, 0, 0.85)" aria-hidden="true"></span>background <code>rgba(0, 0, 0, 0.85)</code></li>
+<li><span class="swatch" style="background:#fff" aria-hidden="true"></span>text <code>#fff</code></li>
+<li><span class="swatch" style="background:#ff9ba3" aria-hidden="true"></span>variable <code>#ff9ba3</code></li>
+<li><span class="swatch" style="background:#fff" aria-hidden="true"></span>variable2 <code>#fff</code></li>
+<li><span class="swatch" style="background:#d19a66" aria-hidden="true"></span>attribute <code>#d19a66</code></li>
+<li><span class="swatch" style="background:#34B7FF" aria-hidden="true"></span>definition <code>#34B7FF</code></li>
+<li><span class="swatch" style="background:#9AE1FF" aria-hidden="true"></span>keyword <code>#9AE1FF</code></li>
+<li><span class="swatch" style="background:#FA78C3" aria-hidden="true"></span>operator <code>#FA78C3</code></li>
+<li><span class="swatch" style="background:#0af" aria-hidden="true"></span>property <code>#0af</code></li>
+<li><span class="swatch" style="background:#d19a66" aria-hidden="true"></span>number <code>#d19a66</code></li>
+<li><span class="swatch" style="background:#98c379" aria-hidden="true"></span>string <code>#98c379</code></li>
+<li><span class="swatch" style="background:#5c6370" aria-hidden="true"></span>comment <code>#5c6370</code></li>
+<li><span class="swatch" style="background:#abb2bf" aria-hidden="true"></span>meta <code>#abb2bf</code></li>
+<li><span class="swatch" style="background:#e06c75" aria-hidden="true"></span>tag <code>#e06c75</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-vscode" data-search="vscode vscode">
+  <div class="theme-meta"><h3>VSCode</h3><p>Theme ID: <code>vscode</code></p></div>
+  <a href="assets/themes/vscode.png" aria-label="View full-size VSCode preview"><img src="assets/themes/vscode.png" alt="JavaScript code in the VSCode theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#1E1E1E" aria-hidden="true"></span>background <code>#1E1E1E</code></li>
+<li><span class="swatch" style="background:#D4D4D4" aria-hidden="true"></span>text <code>#D4D4D4</code></li>
+<li><span class="swatch" style="background:#9CDCFE" aria-hidden="true"></span>variable <code>#9CDCFE</code></li>
+<li><span class="swatch" style="background:#d19a66" aria-hidden="true"></span>attribute <code>#d19a66</code></li>
+<li><span class="swatch" style="background:#DCDCAA" aria-hidden="true"></span>definition <code>#DCDCAA</code></li>
+<li><span class="swatch" style="background:#C586C0" aria-hidden="true"></span>keyword <code>#C586C0</code></li>
+<li><span class="swatch" style="background:#D4D4D4" aria-hidden="true"></span>operator <code>#D4D4D4</code></li>
+<li><span class="swatch" style="background:#DCDCAA" aria-hidden="true"></span>property <code>#DCDCAA</code></li>
+<li><span class="swatch" style="background:#B5CEA8" aria-hidden="true"></span>number <code>#B5CEA8</code></li>
+<li><span class="swatch" style="background:#CE9178" aria-hidden="true"></span>string <code>#CE9178</code></li>
+<li><span class="swatch" style="background:#6A9955" aria-hidden="true"></span>comment <code>#6A9955</code></li>
+<li><span class="swatch" style="background:#D4D4D4" aria-hidden="true"></span>meta <code>#D4D4D4</code></li>
+<li><span class="swatch" style="background:#569cd6" aria-hidden="true"></span>tag <code>#569cd6</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-yeti" data-search="yeti yeti">
+  <div class="theme-meta"><h3>Yeti</h3><p>Theme ID: <code>yeti</code></p></div>
+  <a href="assets/themes/yeti.png" aria-label="View full-size Yeti preview"><img src="assets/themes/yeti.png" alt="JavaScript code in the Yeti theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#ECEAE8" aria-hidden="true"></span>background <code>#ECEAE8</code></li>
+<li><span class="swatch" style="background:#d1c9c0" aria-hidden="true"></span>text <code>#d1c9c0</code></li>
+<li><span class="swatch" style="background:#55b5db" aria-hidden="true"></span>variable <code>#55b5db</code></li>
+<li><span class="swatch" style="background:#a074c4" aria-hidden="true"></span>variable2 <code>#a074c4</code></li>
+<li><span class="swatch" style="background:#96c0d8" aria-hidden="true"></span>variable3 <code>#96c0d8</code></li>
+<li><span class="swatch" style="background:#9fb96e" aria-hidden="true"></span>attribute <code>#9fb96e</code></li>
+<li><span class="swatch" style="background:#55b5db" aria-hidden="true"></span>definition <code>#55b5db</code></li>
+<li><span class="swatch" style="background:#9fb96e" aria-hidden="true"></span>keyword <code>#9fb96e</code></li>
+<li><span class="swatch" style="background:#9fb96e" aria-hidden="true"></span>operator <code>#9fb96e</code></li>
+<li><span class="swatch" style="background:#a074c4" aria-hidden="true"></span>property <code>#a074c4</code></li>
+<li><span class="swatch" style="background:#a074c4" aria-hidden="true"></span>number <code>#a074c4</code></li>
+<li><span class="swatch" style="background:#96c0d8" aria-hidden="true"></span>string <code>#96c0d8</code></li>
+<li><span class="swatch" style="background:#d4c8be" aria-hidden="true"></span>comment <code>#d4c8be</code></li>
+<li><span class="swatch" style="background:#96c0d8" aria-hidden="true"></span>meta <code>#96c0d8</code></li>
+<li><span class="swatch" style="background:#96c0d8" aria-hidden="true"></span>tag <code>#96c0d8</code></li></ul></details>
+</article>
+<article class="theme-card" id="theme-zenburn" data-search="zenburn zenburn">
+  <div class="theme-meta"><h3>Zenburn</h3><p>Theme ID: <code>zenburn</code></p></div>
+  <a href="assets/themes/zenburn.png" aria-label="View full-size Zenburn preview"><img src="assets/themes/zenburn.png" alt="JavaScript code in the Zenburn theme" loading="lazy" decoding="async" width="1566" height="774"></a>
+  <details><summary>Color palette</summary><ul class="palette"><li><span class="swatch" style="background:#3f3f3f" aria-hidden="true"></span>background <code>#3f3f3f</code></li>
+<li><span class="swatch" style="background:#dcdccc" aria-hidden="true"></span>text <code>#dcdccc</code></li>
+<li><span class="swatch" style="background:#dfaf8f" aria-hidden="true"></span>variable <code>#dfaf8f</code></li>
+<li><span class="swatch" style="background:#dcdccc" aria-hidden="true"></span>variable3 <code>#dcdccc</code></li>
+<li><span class="swatch" style="background:#dfaf8f" aria-hidden="true"></span>attribute <code>#dfaf8f</code></li>
+<li><span class="swatch" style="background:#dcdccc" aria-hidden="true"></span>definition <code>#dcdccc</code></li>
+<li><span class="swatch" style="background:#f0dfaf" aria-hidden="true"></span>keyword <code>#f0dfaf</code></li>
+<li><span class="swatch" style="background:#f0efd0" aria-hidden="true"></span>operator <code>#f0efd0</code></li>
+<li><span class="swatch" style="background:#dfaf8f" aria-hidden="true"></span>property <code>#dfaf8f</code></li>
+<li><span class="swatch" style="background:#dcdccc" aria-hidden="true"></span>number <code>#dcdccc</code></li>
+<li><span class="swatch" style="background:#cc9393" aria-hidden="true"></span>string <code>#cc9393</code></li>
+<li><span class="swatch" style="background:#7f9f7f" aria-hidden="true"></span>comment <code>#7f9f7f</code></li>
+<li><span class="swatch" style="background:#f0dfaf" aria-hidden="true"></span>meta <code>#f0dfaf</code></li>
+<li><span class="swatch" style="background:#93e0e3" aria-hidden="true"></span>tag <code>#93e0e3</code></li></ul></details>
+</article>
+<!-- themes:end -->
+        </div>
+      </section>
+
+      <section id="limitations">
+        <h2>Good to know</h2><ul>
+          <li>This is a native server-side library, not a browser canvas bundle. GitHub Pages hosts only the documentation.</li>
+          <li>Automatic language detection can guess incorrectly for short snippets. Set <code>language</code> explicitly for reliable highlighting.</li>
+          <li>Tabs are converted to two spaces. Trailing whitespace is trimmed.</li>
+          <li>No soft wrap: text wider than <code>maxWidth</code> is clipped. Increase the width or break long lines yourself.</li>
+          <li>No background image or watermark support. Additional fonts can be registered locally.</li>
+          <li>Carbon themes with extra CSS use only their base colors here. Effects such as SynthWave glow are not included.</li>
+          <li>Native binary availability depends on the OS and architecture supported by <code>@napi-rs/canvas</code>. Node and Bun runtime checks were run on Linux x64.</li>
+        </ul>
+      </section>
+
+      <section id="development">
+        <p class="eyebrow">07 / CONTRIBUTING</p><h2>Development &amp; GitHub Pages</h2>
+        <h3>Run the checks</h3><pre><code>npm test
+npm run test:types
+bun test ./test.bun.ts
+npm run test:docs
+npm run themes</code></pre>
+        <p><code>npm run themes</code> regenerates the 29 images, the theme gallery on this page, and <a href="https://github.com/cabrata/carbon-canvas/blob/main/THEMES.md">THEMES.md</a>. Changes to the gallery should be made in <code>scripts/themes.js</code>.</p>
+        <h3>Host these docs yourself</h3><ol><li>Push your repository to GitHub.</li><li>Open <strong>Settings → Pages → Build and deployment</strong>.</li><li>Select <strong>Deploy from a branch</strong>, branch <strong>main</strong>, folder <strong>/docs</strong>, then Save.</li><li>The site is served at <code>https://&lt;user&gt;.github.io/&lt;repo&gt;/</code>. No build command or framework is needed.</li></ol>
+        <p>A <code>.nojekyll</code> file keeps the site fully static. All local asset URLs are relative so project subpaths work.</p>
+      </section>
+      <footer><strong>carbon-canvas</strong><p>Inspired by <a href="https://github.com/carbon-app/carbon">Carbon by Dawn Labs</a>. Fonts by Hack, Fira Code, and JetBrains Mono. <a href="https://github.com/cabrata/carbon-canvas/blob/main/LICENSE">MIT licensed</a>.</p><a href="#overview">Back to top ↑</a></footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,16 +1,16 @@
 # carbon-canvas
 
-**English** | [Bahasa Indonesia](README.id.md)
+**English** | [Bahasa Indonesia](https://github.com/cabrata/carbon-canvas/blob/main/README.id.md) | [Documentation](https://cabrata.github.io/carbon-canvas/)
 
 Create beautiful images of your source code like [carbon.now.sh](https://carbon.now.sh), directly from **Node.js**. No browser, no Puppeteer, no Chromium.
 
 Rendering is done with [`@napi-rs/canvas`](https://github.com/Brooooooklyn/canvas) (Skia, prebuilt binaries, no system dependencies) and syntax highlighting with [`highlight.js`](https://highlightjs.org). Themes, layout metrics, shadows, and window controls are ported from the source code of [carbon-app/carbon](https://github.com/carbon-app/carbon).
 
-![default](assets/default.png)
+![default](https://raw.githubusercontent.com/cabrata/carbon-canvas/main/docs/assets/default.png)
 
-![dracula](assets/dracula.png)
+![dracula](https://raw.githubusercontent.com/cabrata/carbon-canvas/main/docs/assets/dracula.png)
 
-![one-light](assets/one-light.png)
+![one-light](https://raw.githubusercontent.com/cabrata/carbon-canvas/main/docs/assets/one-light.png)
 
 ## Features
 
@@ -26,12 +26,12 @@ Rendering is done with [`@napi-rs/canvas`](https://github.com/Brooooooklyn/canva
 ## Installation
 
 ```bash
-git clone https://github.com/cabrata/carbon-canvas.git
-cd carbon-canvas
-npm install
+npm install carbon-canvas
+# or with Bun
+bun add carbon-canvas
 ```
 
-Or install it straight from GitHub into your project:
+Alternatively, install directly from GitHub:
 
 ```bash
 npm install github:cabrata/carbon-canvas
@@ -57,7 +57,7 @@ fs.writeFileSync('code.png', png)
 
 ### TypeScript / ESM
 
-Type definitions ship with the package, no `@types` needed. Works with CommonJS, ESM, TypeScript, and [Bun](https://bun.sh).
+Type definitions ship with the package, no separate `@types/carbon-canvas` needed. Works with CommonJS, ESM, TypeScript, and [Bun](https://bun.sh).
 
 ```ts
 import { render, type RenderOptions } from 'carbon-canvas'
@@ -108,18 +108,24 @@ const express = require('express')
 const { render } = require('carbon-canvas')
 
 const app = express()
-app.use(express.json({ limit: '100kb' }))
+app.use(express.json({ limit: '16kb' }))
 
 app.post('/carbon', (req, res) => {
+  const code = req.body?.code
+  if (typeof code !== 'string' || code.length > 8000 || code.split('\n').length > 100) {
+    return res.status(400).json({ error: 'Use a string of up to 8000 characters and 100 lines' })
+  }
   try {
-    res.type('png').send(render(req.body.code, req.body.options))
-  } catch (e) {
-    res.status(400).json({ error: e.message })
+    res.type('png').send(render(code, { language: 'javascript', scale: 1 }))
+  } catch {
+    res.status(500).json({ error: 'Unable to render image' })
   }
 })
 
 app.listen(3000)
 ```
+
+For a public API, add authentication/rate limiting or a worker queue. Never pass arbitrary untrusted render options straight to native canvas.
 
 ## API
 
@@ -173,7 +179,7 @@ render(code, { fontFamily: 'Cascadia Code' })
 
 ## Themes
 
-See previews of every theme in **[THEMES.md](THEMES.md)**.
+See every theme in the **[web gallery](https://cabrata.github.io/carbon-canvas/#themes)** or **[THEMES.md](https://github.com/cabrata/carbon-canvas/blob/main/THEMES.md)**.
 
 `3024-night`, `a11y-dark`, `blackboard`, `base16-dark`, `base16-light`, `cobalt`, `dracula`, `duotone-dark`, `hopscotch`, `lucario`, `material`, `monokai`, `night-owl`, `nord`, `oceanic-next`, `one-light`, `one-dark`, `panda-syntax`, `paraiso-dark`, `seti`, `shades-of-purple`, `solarized dark`, `solarized light`, `synthwave-84`, `twilight`, `verminal`, `vscode`, `yeti`, `zenburn`
 
@@ -219,13 +225,20 @@ Missing keys fall back to the `text` color.
 
 ## Tests
 
+For development, clone the repository and run `npm install` first. Use `require('./')` or `import … from './index.mjs'` to load the local library.
+
 ```bash
 npm test
 npm run test:types
 bun test ./test.bun.ts
+npm run test:docs
 ```
 
 Writes sample images to the `out/` folder. Regenerate the theme previews with `npm run themes`.
+
+## GitHub Pages
+
+The documentation is a static site in `docs/`, without a framework or build step. To deploy your fork, open **Settings → Pages**, select **Deploy from a branch**, then choose **main /docs**. All local URLs are relative so repository subpaths work.
 
 ## Credits
 
@@ -234,4 +247,4 @@ Writes sample images to the `out/` folder. Regenerate the theme previews with `n
 
 ## License
 
-MIT
+The JavaScript library is MIT-licensed. Bundled fonts retain their own licenses. See [NOTICE](https://github.com/cabrata/carbon-canvas/blob/main/NOTICE) and the full font notices in `fonts/`.

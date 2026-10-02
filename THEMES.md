@@ -2,6 +2,8 @@
 
 Previews of all **29 built-in themes** in carbon-canvas. Every image is rendered with the default options (Hack font, default background) and `language: 'javascript'`.
 
+[Web gallery](https://cabrata.github.io/carbon-canvas/#themes)
+
 ```js
 render(code, { theme: '<id>', language: 'javascript' })
 ```
@@ -44,7 +46,7 @@ render(code, { theme: '<id>', language: 'javascript' })
 
 ID: `3024-night`
 
-![3024 Night](assets/themes/3024-night.png)
+![3024 Night](docs/assets/themes/3024-night.png)
 
 <details><summary>Color palette</summary>
 
@@ -70,7 +72,7 @@ ID: `3024-night`
 
 ID: `a11y-dark`
 
-![A11y Dark](assets/themes/a11y-dark.png)
+![A11y Dark](docs/assets/themes/a11y-dark.png)
 
 <details><summary>Color palette</summary>
 
@@ -96,7 +98,7 @@ ID: `a11y-dark`
 
 ID: `blackboard`
 
-![Blackboard](assets/themes/blackboard.png)
+![Blackboard](docs/assets/themes/blackboard.png)
 
 <details><summary>Color palette</summary>
 
@@ -122,7 +124,7 @@ ID: `blackboard`
 
 ID: `base16-dark`
 
-![Base 16 (Dark)](assets/themes/base16-dark.png)
+![Base 16 (Dark)](docs/assets/themes/base16-dark.png)
 
 <details><summary>Color palette</summary>
 
@@ -149,7 +151,7 @@ ID: `base16-dark`
 
 ID: `base16-light`
 
-![Base 16 (Light)](assets/themes/base16-light.png)
+![Base 16 (Light)](docs/assets/themes/base16-light.png)
 
 <details><summary>Color palette</summary>
 
@@ -176,7 +178,7 @@ ID: `base16-light`
 
 ID: `cobalt`
 
-![Cobalt](assets/themes/cobalt.png)
+![Cobalt](docs/assets/themes/cobalt.png)
 
 <details><summary>Color palette</summary>
 
@@ -203,7 +205,7 @@ ID: `cobalt`
 
 ID: `dracula`
 
-![Dracula](assets/themes/dracula.png)
+![Dracula](docs/assets/themes/dracula.png)
 
 <details><summary>Color palette</summary>
 
@@ -231,7 +233,7 @@ ID: `dracula`
 
 ID: `duotone-dark`
 
-![Duotone](assets/themes/duotone-dark.png)
+![Duotone](docs/assets/themes/duotone-dark.png)
 
 <details><summary>Color palette</summary>
 
@@ -259,7 +261,7 @@ ID: `duotone-dark`
 
 ID: `hopscotch`
 
-![Hopscotch](assets/themes/hopscotch.png)
+![Hopscotch](docs/assets/themes/hopscotch.png)
 
 <details><summary>Color palette</summary>
 
@@ -286,7 +288,7 @@ ID: `hopscotch`
 
 ID: `lucario`
 
-![Lucario](assets/themes/lucario.png)
+![Lucario](docs/assets/themes/lucario.png)
 
 <details><summary>Color palette</summary>
 
@@ -313,7 +315,7 @@ ID: `lucario`
 
 ID: `material`
 
-![Material](assets/themes/material.png)
+![Material](docs/assets/themes/material.png)
 
 <details><summary>Color palette</summary>
 
@@ -341,7 +343,7 @@ ID: `material`
 
 ID: `monokai`
 
-![Monokai](assets/themes/monokai.png)
+![Monokai](docs/assets/themes/monokai.png)
 
 <details><summary>Color palette</summary>
 
@@ -369,7 +371,7 @@ ID: `monokai`
 
 ID: `night-owl`
 
-![Night Owl](assets/themes/night-owl.png)
+![Night Owl](docs/assets/themes/night-owl.png)
 
 <details><summary>Color palette</summary>
 
@@ -395,7 +397,7 @@ ID: `night-owl`
 
 ID: `nord`
 
-![Nord](assets/themes/nord.png)
+![Nord](docs/assets/themes/nord.png)
 
 <details><summary>Color palette</summary>
 
@@ -422,7 +424,7 @@ ID: `nord`
 
 ID: `oceanic-next`
 
-![Oceanic Next](assets/themes/oceanic-next.png)
+![Oceanic Next](docs/assets/themes/oceanic-next.png)
 
 <details><summary>Color palette</summary>
 
@@ -448,7 +450,7 @@ ID: `oceanic-next`
 
 ID: `one-light`
 
-![One Light](assets/themes/one-light.png)
+![One Light](docs/assets/themes/one-light.png)
 
 <details><summary>Color palette</summary>
 
@@ -475,7 +477,7 @@ ID: `one-light`
 
 ID: `one-dark`
 
-![One Dark](assets/themes/one-dark.png)
+![One Dark](docs/assets/themes/one-dark.png)
 
 <details><summary>Color palette</summary>
 
@@ -501,7 +503,7 @@ ID: `one-dark`
 
 ID: `panda-syntax`
 
-![Panda](assets/themes/panda-syntax.png)
+![Panda](docs/assets/themes/panda-syntax.png)
 
 <details><summary>Color palette</summary>
 
@@ -529,7 +531,7 @@ ID: `panda-syntax`
 
 ID: `paraiso-dark`
 
-![Paraiso](assets/themes/paraiso-dark.png)
+![Paraiso](docs/assets/themes/paraiso-dark.png)
 
 <details><summary>Color palette</summary>
 
@@ -541,7 +543,7 @@ ID: `paraiso-dark`
 | `variable2` | `#06b6ef` |
 | `attribute` | `#48b685` |
 | `definition` | `#f99b15` |
-| `keyword` | `#ef6155;` |
+| `keyword` | `#ef6155` |
 | `operator` | `#fff` |
 | `property` | `#48b685` |
 | `number` | `#815ba4` |
@@ -556,7 +558,7 @@ ID: `paraiso-dark`
 
 ID: `seti`
 
-![Seti](assets/themes/seti.png)
+![Seti](docs/assets/themes/seti.png)
 
 <details><summary>Color palette</summary>
 
@@ -584,7 +586,7 @@ ID: `seti`
 
 ID: `shades-of-purple`
 
-![Shades of Purple ](assets/themes/shades-of-purple.png)
+![Shades of Purple ](docs/assets/themes/shades-of-purple.png)
 
 <details><summary>Color palette</summary>
 
@@ -610,7 +612,7 @@ ID: `shades-of-purple`
 
 ID: `solarized dark`
 
-![Solarized (Dark)](assets/themes/solarized-dark.png)
+![Solarized (Dark)](docs/assets/themes/solarized-dark.png)
 
 <details><summary>Color palette</summary>
 
@@ -638,7 +640,7 @@ ID: `solarized dark`
 
 ID: `solarized light`
 
-![Solarized (Light)](assets/themes/solarized-light.png)
+![Solarized (Light)](docs/assets/themes/solarized-light.png)
 
 <details><summary>Color palette</summary>
 
@@ -666,7 +668,7 @@ ID: `solarized light`
 
 ID: `synthwave-84`
 
-![SynthWave '84](assets/themes/synthwave-84.png)
+![SynthWave '84](docs/assets/themes/synthwave-84.png)
 
 <details><summary>Color palette</summary>
 
@@ -692,7 +694,7 @@ ID: `synthwave-84`
 
 ID: `twilight`
 
-![Twilight](assets/themes/twilight.png)
+![Twilight](docs/assets/themes/twilight.png)
 
 <details><summary>Color palette</summary>
 
@@ -718,7 +720,7 @@ ID: `twilight`
 
 ID: `verminal`
 
-![Verminal](assets/themes/verminal.png)
+![Verminal](docs/assets/themes/verminal.png)
 
 <details><summary>Color palette</summary>
 
@@ -745,7 +747,7 @@ ID: `verminal`
 
 ID: `vscode`
 
-![VSCode](assets/themes/vscode.png)
+![VSCode](docs/assets/themes/vscode.png)
 
 <details><summary>Color palette</summary>
 
@@ -771,7 +773,7 @@ ID: `vscode`
 
 ID: `yeti`
 
-![Yeti](assets/themes/yeti.png)
+![Yeti](docs/assets/themes/yeti.png)
 
 <details><summary>Color palette</summary>
 
@@ -799,7 +801,7 @@ ID: `yeti`
 
 ID: `zenburn`
 
-![Zenburn](assets/themes/zenburn.png)
+![Zenburn](docs/assets/themes/zenburn.png)
 
 <details><summary>Color palette</summary>
 
