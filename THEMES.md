@@ -1,0 +1,825 @@
+# Theme Preview
+
+Preview semua **29 tema** bawaan carbon-canvas. Semua gambar dirender dengan opsi default (font Hack, background default) dan `language: 'javascript'`.
+
+```js
+render(code, { theme: '<id>', language: 'javascript' })
+```
+
+## Daftar
+
+| Nama | ID | Background |
+| --- | --- | --- |
+| [3024 Night](#3024-night) | `3024-night` | `#090300` |
+| [A11y Dark](#a11y-dark) | `a11y-dark` | `#2b2b2b` |
+| [Blackboard](#blackboard) | `blackboard` | `#0C1021` |
+| [Base 16 (Dark)](#base-16-dark) | `base16-dark` | `#151515` |
+| [Base 16 (Light)](#base-16-light) | `base16-light` | `#f5f5f5` |
+| [Cobalt](#cobalt) | `cobalt` | `#002240` |
+| [Dracula](#dracula) | `dracula` | `#282a36` |
+| [Duotone](#duotone) | `duotone-dark` | `#2a2734` |
+| [Hopscotch](#hopscotch) | `hopscotch` | `#322931` |
+| [Lucario](#lucario) | `lucario` | `#2b3e50` |
+| [Material](#material) | `material` | `#263238` |
+| [Monokai](#monokai) | `monokai` | `#272822` |
+| [Night Owl](#night-owl) | `night-owl` | `#011627` |
+| [Nord](#nord) | `nord` | `#2e3440` |
+| [Oceanic Next](#oceanic-next) | `oceanic-next` | `#304148` |
+| [One Light](#one-light) | `one-light` | `#fafafa` |
+| [One Dark](#one-dark) | `one-dark` | `#282c34` |
+| [Panda](#panda) | `panda-syntax` | `#292A2B` |
+| [Paraiso](#paraiso) | `paraiso-dark` | `#2f1e2e` |
+| [Seti](#seti) | `seti` | `#151718` |
+| [Shades of Purple ](#shades-of-purple-) | `shades-of-purple` | `#2D2B55` |
+| [Solarized (Dark)](#solarized-dark) | `solarized dark` | `#002b36` |
+| [Solarized (Light)](#solarized-light) | `solarized light` | `#fdf6e3` |
+| [SynthWave '84](#synthwave-84) | `synthwave-84` | `#2b213a` |
+| [Twilight](#twilight) | `twilight` | `#141414` |
+| [Verminal](#verminal) | `verminal` | `rgba(0, 0, 0, 0.85)` |
+| [VSCode](#vscode) | `vscode` | `#1E1E1E` |
+| [Yeti](#yeti) | `yeti` | `#ECEAE8` |
+| [Zenburn](#zenburn) | `zenburn` | `#3f3f3f` |
+
+## 3024 Night
+
+ID: `3024-night`
+
+![3024 Night](assets/themes/3024-night.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#090300` |
+| `text` | `#d6d5d4` |
+| `variable` | `#01a252` |
+| `variable2` | `#01a0e4` |
+| `attribute` | `#00c` |
+| `definition` | `#e8bbd0` |
+| `keyword` | `#db2d20` |
+| `operator` | `#fff` |
+| `property` | `#01a252` |
+| `number` | `#a16a94` |
+| `string` | `#fded02` |
+| `comment` | `#cdab53` |
+| `meta` | `#555` |
+
+</details>
+
+## A11y Dark
+
+ID: `a11y-dark`
+
+![A11y Dark](assets/themes/a11y-dark.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#2b2b2b` |
+| `text` | `#f8f8f2` |
+| `variable` | `#00e0e0` |
+| `attribute` | `#abe338` |
+| `definition` | `#ffd700` |
+| `keyword` | `#ffa07a` |
+| `operator` | `#f8f8f2` |
+| `property` | `#abe338` |
+| `number` | `#dcc6e0` |
+| `string` | `#ffd700` |
+| `comment` | `#d4d0ab` |
+| `meta` | `#d4d0ab` |
+| `tag` | `#dcc6e0` |
+
+</details>
+
+## Blackboard
+
+ID: `blackboard`
+
+![Blackboard](assets/themes/blackboard.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#0C1021` |
+| `text` | `#F8F8F8` |
+| `variable` | `#FF6400` |
+| `attribute` | `#8DA6CE` |
+| `definition` | `#8DA6CE` |
+| `keyword` | `#FBDE2D` |
+| `operator` | `#fff` |
+| `property` | `#fff` |
+| `number` | `#D8FA3C` |
+| `string` | `#61CE3C` |
+| `comment` | `#AEAEAE` |
+| `meta` | `#D8FA3C` |
+| `tag` | `#8DA6CE` |
+
+</details>
+
+## Base 16 (Dark)
+
+ID: `base16-dark`
+
+![Base 16 (Dark)](assets/themes/base16-dark.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#151515` |
+| `text` | `#e0e0e0` |
+| `variable` | `#90a959` |
+| `variable2` | `#6a9fb5` |
+| `attribute` | `#00c` |
+| `definition` | `#d28445` |
+| `keyword` | `#ac4142` |
+| `operator` | `#fff` |
+| `property` | `#90a959` |
+| `number` | `#aa759f` |
+| `string` | `#f4bf75` |
+| `comment` | `#8f5536` |
+| `meta` | `#555` |
+| `tag` | `#ac4142` |
+
+</details>
+
+## Base 16 (Light)
+
+ID: `base16-light`
+
+![Base 16 (Light)](assets/themes/base16-light.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#f5f5f5` |
+| `text` | `#202020` |
+| `variable` | `#90a959` |
+| `variable2` | `#6a9fb5` |
+| `attribute` | `#90a959` |
+| `definition` | `#d28445` |
+| `keyword` | `#ac4142` |
+| `operator` | `#000` |
+| `property` | `#90a959` |
+| `number` | `#aa759f` |
+| `string` | `#f4bf75` |
+| `comment` | `#8f5536` |
+| `meta` | `#555` |
+| `tag` | `#ac4142` |
+
+</details>
+
+## Cobalt
+
+ID: `cobalt`
+
+![Cobalt](assets/themes/cobalt.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#002240` |
+| `text` | `#fff` |
+| `variable` | `#9effff` |
+| `variable3` | `white` |
+| `attribute` | `#ff80e1` |
+| `definition` | `#fff` |
+| `keyword` | `#ffee80` |
+| `operator` | `#fff` |
+| `property` | `#fff` |
+| `number` | `#ff80e1` |
+| `string` | `#3ad900` |
+| `comment` | `#08f` |
+| `meta` | `#ff9d00` |
+| `tag` | `#9effff` |
+
+</details>
+
+## Dracula
+
+ID: `dracula`
+
+![Dracula](assets/themes/dracula.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#282a36` |
+| `text` | `#f8f8f2` |
+| `variable` | `#50fa7b` |
+| `variable2` | `white` |
+| `variable3` | `#ffb86c` |
+| `attribute` | `#50fa7b` |
+| `definition` | `#50fa7b` |
+| `keyword` | `#ff79c6` |
+| `operator` | `#ff79c6` |
+| `property` | `#66d9ef` |
+| `number` | `#bd93f9` |
+| `string` | `#f1fa8c` |
+| `comment` | `#6272a4` |
+| `meta` | `#f8f8f2` |
+| `tag` | `#ff79c6` |
+
+</details>
+
+## Duotone
+
+ID: `duotone-dark`
+
+![Duotone](assets/themes/duotone-dark.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#2a2734` |
+| `text` | `#6c6783` |
+| `variable` | `#ffcc99` |
+| `variable2` | `#7a63ee` |
+| `variable3` | `#7a63ee` |
+| `attribute` | `#ffcc99` |
+| `definition` | `#eeebff` |
+| `keyword` | `#ffcc99` |
+| `operator` | `#ffad5c` |
+| `property` | `#9a86fd` |
+| `number` | `#ffcc99` |
+| `string` | `#ffb870` |
+| `comment` | `#6c6783` |
+| `meta` | `#555` |
+| `tag` | `#eeebff` |
+
+</details>
+
+## Hopscotch
+
+ID: `hopscotch`
+
+![Hopscotch](assets/themes/hopscotch.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#322931` |
+| `text` | `#d5d3d5` |
+| `variable` | `#8fc13e` |
+| `variable2` | `#1290bf` |
+| `attribute` | `#8fc13e` |
+| `definition` | `#fd8b19` |
+| `keyword` | `#dd464c` |
+| `operator` | `#fff` |
+| `property` | `#8fc13e` |
+| `number` | `#c85e7c` |
+| `string` | `#fdcc59` |
+| `comment` | `#b33508` |
+| `meta` | `#555` |
+| `tag` | `#dd464c` |
+
+</details>
+
+## Lucario
+
+ID: `lucario`
+
+![Lucario](assets/themes/lucario.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#2b3e50` |
+| `text` | `#f8f8f2` |
+| `variable` | `#f8f8f2` |
+| `variable3` | `#ffb86c` |
+| `attribute` | `#66D9EF` |
+| `definition` | `#72C05D` |
+| `keyword` | `#ff6541` |
+| `operator` | `#66D9EF` |
+| `property` | `#f8f8f2` |
+| `number` | `#ca94ff` |
+| `string` | `#E6DB74` |
+| `comment` | `#5c98cd` |
+| `meta` | `#f8f8f2` |
+| `tag` | `#ff6541` |
+
+</details>
+
+## Material
+
+ID: `material`
+
+![Material](assets/themes/material.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#263238` |
+| `text` | `rgba(233, 237, 237, 1)` |
+| `variable` | `#82B1FF` |
+| `variable2` | `#80CBC4` |
+| `variable3` | `#DECB6B` |
+| `attribute` | `#FFCB6B` |
+| `definition` | `rgba(233, 237, 237, 1)` |
+| `keyword` | `rgba(199, 146, 234, 1)` |
+| `operator` | `rgba(233, 237, 237, 1)` |
+| `property` | `#80CBAE` |
+| `number` | `#F77669` |
+| `string` | `#C3E88D` |
+| `comment` | `#546E7A` |
+| `meta` | `#80CBC4` |
+| `tag` | `rgba(255, 83, 112, 1)` |
+
+</details>
+
+## Monokai
+
+ID: `monokai`
+
+![Monokai](assets/themes/monokai.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#272822` |
+| `text` | `#f8f8f2` |
+| `variable` | `#f8f8f2` |
+| `variable2` | `#9effff` |
+| `variable3` | `#66d9ef` |
+| `attribute` | `#a6e22e` |
+| `definition` | `#fd971f` |
+| `keyword` | `#f92672` |
+| `operator` | `#fff` |
+| `property` | `#a6e22e` |
+| `number` | `#ae81ff` |
+| `string` | `#e6db74` |
+| `comment` | `#75715e` |
+| `meta` | `#555` |
+| `tag` | `#bc6283` |
+
+</details>
+
+## Night Owl
+
+ID: `night-owl`
+
+![Night Owl](assets/themes/night-owl.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#011627` |
+| `text` | `#abb2bf` |
+| `variable` | `#82AAFF` |
+| `attribute` | `#F78C6C` |
+| `definition` | `#82AAFF` |
+| `keyword` | `#c792ea` |
+| `operator` | `#c792ea` |
+| `property` | `#fff` |
+| `number` | `#F78C6C` |
+| `string` | `#ecc48d` |
+| `comment` | `#5c6370` |
+| `meta` | `#7fdbca` |
+| `tag` | `#7fdbca` |
+
+</details>
+
+## Nord
+
+ID: `nord`
+
+![Nord](assets/themes/nord.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#2e3440` |
+| `text` | `#d8dee9` |
+| `variable` | `#88C0D0` |
+| `variable3` | `#d8dee9` |
+| `attribute` | `#8FBCBB` |
+| `definition` | `#D8DEE9` |
+| `keyword` | `#81A1C1` |
+| `operator` | `#81A1C1` |
+| `property` | `#D8DEE9` |
+| `number` | `#B48EAD` |
+| `string` | `#A3BE8C` |
+| `comment` | `#4C566A` |
+| `meta` | `#81A1C1` |
+| `tag` | `#81A1C1` |
+
+</details>
+
+## Oceanic Next
+
+ID: `oceanic-next`
+
+![Oceanic Next](assets/themes/oceanic-next.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#304148` |
+| `text` | `#f8f8f2` |
+| `variable` | `#f8f8f2` |
+| `attribute` | `#C594C5` |
+| `definition` | `#6699CC` |
+| `keyword` | `#C594C5` |
+| `operator` | `#fff` |
+| `property` | `#99C794` |
+| `number` | `#F99157` |
+| `string` | `#99C794` |
+| `comment` | `#65737E` |
+| `meta` | `#555` |
+| `tag` | `#C594C5` |
+
+</details>
+
+## One Light
+
+ID: `one-light`
+
+![One Light](assets/themes/one-light.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#fafafa` |
+| `text` | `#383a42` |
+| `variable` | `#e06c75` |
+| `variable2` | `#e45649` |
+| `attribute` | `#d19a66` |
+| `definition` | `#4078f2` |
+| `keyword` | `#a626a4` |
+| `operator` | `#0184bc` |
+| `property` | `#4078f2` |
+| `number` | `#986801` |
+| `string` | `#50a14f` |
+| `comment` | `#a0a1a7` |
+| `meta` | `#383a42` |
+| `tag` | `#e45649` |
+
+</details>
+
+## One Dark
+
+ID: `one-dark`
+
+![One Dark](assets/themes/one-dark.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#282c34` |
+| `text` | `#abb2bf` |
+| `variable` | `#e06c75` |
+| `attribute` | `#d19a66` |
+| `definition` | `#e5c07b` |
+| `keyword` | `#c678dd` |
+| `operator` | `#56b6c2` |
+| `property` | `#56b6c2` |
+| `number` | `#d19a66` |
+| `string` | `#98c379` |
+| `comment` | `#5c6370` |
+| `meta` | `#abb2bf` |
+| `tag` | `#e06c75` |
+
+</details>
+
+## Panda
+
+ID: `panda-syntax`
+
+![Panda](assets/themes/panda-syntax.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#292A2B` |
+| `text` | `#E6E6E6` |
+| `variable` | `#ffb86c` |
+| `variable2` | `#ff9ac1` |
+| `variable3` | `#ff9ac1` |
+| `attribute` | `#ffb86c` |
+| `definition` | `#e6e6e6` |
+| `keyword` | `#FF75B5` |
+| `operator` | `#f3f3f3` |
+| `property` | `#f3f3f3` |
+| `number` | `#FFB86C` |
+| `string` | `#19F9D8` |
+| `comment` | `#676B79` |
+| `meta` | `#b084eb` |
+| `tag` | `#ff2c6d` |
+
+</details>
+
+## Paraiso
+
+ID: `paraiso-dark`
+
+![Paraiso](assets/themes/paraiso-dark.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#2f1e2e` |
+| `text` | `#b9b6b0` |
+| `variable` | `#48b685` |
+| `variable2` | `#06b6ef` |
+| `attribute` | `#48b685` |
+| `definition` | `#f99b15` |
+| `keyword` | `#ef6155;` |
+| `operator` | `#fff` |
+| `property` | `#48b685` |
+| `number` | `#815ba4` |
+| `string` | `#fec418` |
+| `comment` | `#e96ba8` |
+| `meta` | `#555` |
+| `tag` | `#ef6155` |
+
+</details>
+
+## Seti
+
+ID: `seti`
+
+![Seti](assets/themes/seti.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#151718` |
+| `text` | `#CFD2D1` |
+| `variable` | `#55b5db` |
+| `variable2` | `#a074c4` |
+| `variable3` | `#9fca56` |
+| `attribute` | `#9fca56` |
+| `definition` | `#55b5db` |
+| `keyword` | `#e6cd69` |
+| `operator` | `#9fca56` |
+| `property` | `#a074c4` |
+| `number` | `#cd3f45` |
+| `string` | `#55b5db` |
+| `comment` | `#41535b` |
+| `meta` | `#55b5db` |
+| `tag` | `#55b5db` |
+
+</details>
+
+## Shades of Purple 
+
+ID: `shades-of-purple`
+
+![Shades of Purple ](assets/themes/shades-of-purple.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#2D2B55` |
+| `text` | `#FFFFFF` |
+| `variable` | `#9EFFFF` |
+| `attribute` | `#9EFFFF` |
+| `definition` | `#9EFFFF` |
+| `keyword` | `#FF9D00` |
+| `operator` | `#FF9D00` |
+| `property` | `#FAD000` |
+| `number` | `#FF628C` |
+| `string` | `#A5FF90` |
+| `comment` | `#B362FF` |
+| `meta` | `#FF9D00` |
+| `tag` | `#9EFFFF` |
+
+</details>
+
+## Solarized (Dark)
+
+ID: `solarized dark`
+
+![Solarized (Dark)](assets/themes/solarized-dark.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#002b36` |
+| `text` | `#839496` |
+| `variable` | `#839496` |
+| `variable2` | `#b58900` |
+| `variable3` | `#6c71c4` |
+| `attribute` | `#2aa198` |
+| `definition` | `#2aa198` |
+| `keyword` | `#cb4b16` |
+| `operator` | `#6c71c4` |
+| `property` | `#2aa198` |
+| `number` | `#d33682` |
+| `string` | `#859900` |
+| `comment` | `#586e75` |
+| `meta` | `#859900` |
+| `tag` | `#93a1a1` |
+
+</details>
+
+## Solarized (Light)
+
+ID: `solarized light`
+
+![Solarized (Light)](assets/themes/solarized-light.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#fdf6e3` |
+| `text` | `#657b83` |
+| `variable` | `#839496` |
+| `variable2` | `#b58900` |
+| `variable3` | `#6c71c4` |
+| `attribute` | `#2aa198` |
+| `definition` | `#2aa198` |
+| `keyword` | `#cb4b16` |
+| `operator` | `#6c71c4` |
+| `property` | `#2aa198` |
+| `number` | `#d33682` |
+| `string` | `#859900` |
+| `comment` | `#586e75` |
+| `meta` | `#859900` |
+| `tag` | `#93a1a1` |
+
+</details>
+
+## SynthWave '84
+
+ID: `synthwave-84`
+
+![SynthWave '84](assets/themes/synthwave-84.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#2b213a` |
+| `text` | `#b6b1b1` |
+| `variable` | `#f92aad` |
+| `attribute` | `#fff5f6` |
+| `definition` | `#fdfdfd` |
+| `keyword` | `#f4eee4` |
+| `operator` | `#f4eee4` |
+| `property` | `#fdfdfd` |
+| `number` | `#f97e72` |
+| `string` | `#ff8b39` |
+| `comment` | `#6d77b3` |
+| `meta` | `#ff8b39` |
+| `tag` | `#f92aad` |
+
+</details>
+
+## Twilight
+
+ID: `twilight`
+
+![Twilight](assets/themes/twilight.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#141414` |
+| `text` | `#f7f7f7` |
+| `variable` | `#607392` |
+| `attribute` | `#d6bb6d` |
+| `definition` | `#607392` |
+| `keyword` | `#f9ee98` |
+| `operator` | `#cda869` |
+| `property` | `#fff` |
+| `number` | `#ca7841` |
+| `string` | `#8f9d6a` |
+| `comment` | `#777` |
+| `meta` | `#f7f7f7` |
+| `tag` | `#997643` |
+
+</details>
+
+## Verminal
+
+ID: `verminal`
+
+![Verminal](assets/themes/verminal.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `rgba(0, 0, 0, 0.85)` |
+| `text` | `#fff` |
+| `variable` | `#ff9ba3` |
+| `variable2` | `#fff` |
+| `attribute` | `#d19a66` |
+| `definition` | `#34B7FF` |
+| `keyword` | `#9AE1FF` |
+| `operator` | `#FA78C3` |
+| `property` | `#0af` |
+| `number` | `#d19a66` |
+| `string` | `#98c379` |
+| `comment` | `#5c6370` |
+| `meta` | `#abb2bf` |
+| `tag` | `#e06c75` |
+
+</details>
+
+## VSCode
+
+ID: `vscode`
+
+![VSCode](assets/themes/vscode.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#1E1E1E` |
+| `text` | `#D4D4D4` |
+| `variable` | `#9CDCFE` |
+| `attribute` | `#d19a66` |
+| `definition` | `#DCDCAA` |
+| `keyword` | `#C586C0` |
+| `operator` | `#D4D4D4` |
+| `property` | `#DCDCAA` |
+| `number` | `#B5CEA8` |
+| `string` | `#CE9178` |
+| `comment` | `#6A9955` |
+| `meta` | `#D4D4D4` |
+| `tag` | `#569cd6` |
+
+</details>
+
+## Yeti
+
+ID: `yeti`
+
+![Yeti](assets/themes/yeti.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#ECEAE8` |
+| `text` | `#d1c9c0` |
+| `variable` | `#55b5db` |
+| `variable2` | `#a074c4` |
+| `variable3` | `#96c0d8` |
+| `attribute` | `#9fb96e` |
+| `definition` | `#55b5db` |
+| `keyword` | `#9fb96e` |
+| `operator` | `#9fb96e` |
+| `property` | `#a074c4` |
+| `number` | `#a074c4` |
+| `string` | `#96c0d8` |
+| `comment` | `#d4c8be` |
+| `meta` | `#96c0d8` |
+| `tag` | `#96c0d8` |
+
+</details>
+
+## Zenburn
+
+ID: `zenburn`
+
+![Zenburn](assets/themes/zenburn.png)
+
+<details><summary>Palet warna</summary>
+
+| Key | Warna |
+| --- | --- |
+| `background` | `#3f3f3f` |
+| `text` | `#dcdccc` |
+| `variable` | `#dfaf8f` |
+| `variable3` | `#dcdccc` |
+| `attribute` | `#dfaf8f` |
+| `definition` | `#dcdccc` |
+| `keyword` | `#f0dfaf` |
+| `operator` | `#f0efd0` |
+| `property` | `#dfaf8f` |
+| `number` | `#dcdccc` |
+| `string` | `#cc9393` |
+| `comment` | `#7f9f7f` |
+| `meta` | `#f0dfaf` |
+| `tag` | `#93e0e3` |
+
+</details>
+
+Regenerate: `npm run themes`
