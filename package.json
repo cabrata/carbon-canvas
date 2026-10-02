@@ -1,0 +1,17 @@
+{
+  "name": "carbon-canvas",
+  "version": "1.0.0",
+  "description": "carbon.now.sh style code images in Node.js, no browser",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@napi-rs/canvas": "^1.0.10",
+    "highlight.js": "^11.12.0"
+  }
+}
