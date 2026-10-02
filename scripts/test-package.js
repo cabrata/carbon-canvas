@@ -1,4 +1,4 @@
-// Run: node scripts/test-package.js (installs a clean consumer using npm).
+// Run: node scripts/test-package.js. Add --registry to check the published version.
 const assert = require('node:assert/strict')
 const fs = require('node:fs')
 const os = require('node:os')
@@ -24,7 +24,11 @@ try {
   assert(!files.some(file => /^(docs|out|node_modules|scripts)\//.test(file)), 'Unexpected package files')
   assert.equal(packed.bundled.length, 0, 'Native dependencies must not be vendored')
   fs.writeFileSync(path.join(consumer, 'package.json'), JSON.stringify({ private: true, type: 'module' }))
-  run(npm, ['install', '--ignore-scripts', '--no-audit', '--no-fund', path.join(consumer, packed.filename)])
+  const source = process.argv.includes('--registry') ? `${metadata.name}@${metadata.version}` : path.join(consumer, packed.filename)
+  run(npm, ['install', '--ignore-scripts', '--no-audit', '--no-fund', source])
+  const installed = path.join(consumer, 'node_modules', metadata.name)
+  assert.equal(JSON.parse(fs.readFileSync(path.join(installed, 'package.json'), 'utf8')).version, metadata.version)
+  for (const file of files) assert(fs.existsSync(path.join(installed, file)), `Installed package missing ${file}`)
   assert(fs.existsSync(path.join(consumer, 'node_modules/@types/node/package.json')), 'Buffer types must install without dev dependencies')
   run(npm, ['install', '--save-dev', '--ignore-scripts', '--no-audit', '--no-fund', `typescript@${metadata.devDependencies.typescript}`])
 
@@ -68,7 +72,7 @@ assert.equal(carbon.default, carbon)
     run('bun', ['compiled/import.mjs'])
     run('bun', ['compiled/require.cjs'])
   }
-  console.log(`ok: ${files.length} packed files, clean dependencies, NodeNext ESM/CJS types and native PNG rendering`)
+  console.log(`ok: ${source}, ${files.length} packaged files, clean dependencies, NodeNext ESM/CJS types and native PNG rendering`)
 } finally {
   fs.rmSync(consumer, { recursive: true, force: true })
 }
