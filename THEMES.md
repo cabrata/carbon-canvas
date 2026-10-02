@@ -1,14 +1,14 @@
 # Theme Preview
 
-Preview semua **29 tema** bawaan carbon-canvas. Semua gambar dirender dengan opsi default (font Hack, background default) dan `language: 'javascript'`.
+Previews of all **29 built-in themes** in carbon-canvas. Every image is rendered with the default options (Hack font, default background) and `language: 'javascript'`.
 
 ```js
 render(code, { theme: '<id>', language: 'javascript' })
 ```
 
-## Daftar
+## List
 
-| Nama | ID | Background |
+| Name | ID | Background |
 | --- | --- | --- |
 | [3024 Night](#3024-night) | `3024-night` | `#090300` |
 | [A11y Dark](#a11y-dark) | `a11y-dark` | `#2b2b2b` |
@@ -46,9 +46,9 @@ ID: `3024-night`
 
 ![3024 Night](assets/themes/3024-night.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#090300` |
 | `text` | `#d6d5d4` |
@@ -72,9 +72,9 @@ ID: `a11y-dark`
 
 ![A11y Dark](assets/themes/a11y-dark.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#2b2b2b` |
 | `text` | `#f8f8f2` |
@@ -98,9 +98,9 @@ ID: `blackboard`
 
 ![Blackboard](assets/themes/blackboard.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#0C1021` |
 | `text` | `#F8F8F8` |
@@ -124,9 +124,9 @@ ID: `base16-dark`
 
 ![Base 16 (Dark)](assets/themes/base16-dark.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#151515` |
 | `text` | `#e0e0e0` |
@@ -151,9 +151,9 @@ ID: `base16-light`
 
 ![Base 16 (Light)](assets/themes/base16-light.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#f5f5f5` |
 | `text` | `#202020` |
@@ -178,9 +178,9 @@ ID: `cobalt`
 
 ![Cobalt](assets/themes/cobalt.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#002240` |
 | `text` | `#fff` |
@@ -205,9 +205,9 @@ ID: `dracula`
 
 ![Dracula](assets/themes/dracula.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#282a36` |
 | `text` | `#f8f8f2` |
@@ -233,9 +233,9 @@ ID: `duotone-dark`
 
 ![Duotone](assets/themes/duotone-dark.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#2a2734` |
 | `text` | `#6c6783` |
@@ -261,9 +261,9 @@ ID: `hopscotch`
 
 ![Hopscotch](assets/themes/hopscotch.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#322931` |
 | `text` | `#d5d3d5` |
@@ -288,9 +288,9 @@ ID: `lucario`
 
 ![Lucario](assets/themes/lucario.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#2b3e50` |
 | `text` | `#f8f8f2` |
@@ -315,9 +315,9 @@ ID: `material`
 
 ![Material](assets/themes/material.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#263238` |
 | `text` | `rgba(233, 237, 237, 1)` |
@@ -343,9 +343,9 @@ ID: `monokai`
 
 ![Monokai](assets/themes/monokai.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#272822` |
 | `text` | `#f8f8f2` |
@@ -371,9 +371,9 @@ ID: `night-owl`
 
 ![Night Owl](assets/themes/night-owl.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#011627` |
 | `text` | `#abb2bf` |
@@ -397,9 +397,9 @@ ID: `nord`
 
 ![Nord](assets/themes/nord.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#2e3440` |
 | `text` | `#d8dee9` |
@@ -424,9 +424,9 @@ ID: `oceanic-next`
 
 ![Oceanic Next](assets/themes/oceanic-next.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#304148` |
 | `text` | `#f8f8f2` |
@@ -450,9 +450,9 @@ ID: `one-light`
 
 ![One Light](assets/themes/one-light.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#fafafa` |
 | `text` | `#383a42` |
@@ -477,9 +477,9 @@ ID: `one-dark`
 
 ![One Dark](assets/themes/one-dark.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#282c34` |
 | `text` | `#abb2bf` |
@@ -503,9 +503,9 @@ ID: `panda-syntax`
 
 ![Panda](assets/themes/panda-syntax.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#292A2B` |
 | `text` | `#E6E6E6` |
@@ -531,9 +531,9 @@ ID: `paraiso-dark`
 
 ![Paraiso](assets/themes/paraiso-dark.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#2f1e2e` |
 | `text` | `#b9b6b0` |
@@ -558,9 +558,9 @@ ID: `seti`
 
 ![Seti](assets/themes/seti.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#151718` |
 | `text` | `#CFD2D1` |
@@ -586,9 +586,9 @@ ID: `shades-of-purple`
 
 ![Shades of Purple ](assets/themes/shades-of-purple.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#2D2B55` |
 | `text` | `#FFFFFF` |
@@ -612,9 +612,9 @@ ID: `solarized dark`
 
 ![Solarized (Dark)](assets/themes/solarized-dark.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#002b36` |
 | `text` | `#839496` |
@@ -640,9 +640,9 @@ ID: `solarized light`
 
 ![Solarized (Light)](assets/themes/solarized-light.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#fdf6e3` |
 | `text` | `#657b83` |
@@ -668,9 +668,9 @@ ID: `synthwave-84`
 
 ![SynthWave '84](assets/themes/synthwave-84.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#2b213a` |
 | `text` | `#b6b1b1` |
@@ -694,9 +694,9 @@ ID: `twilight`
 
 ![Twilight](assets/themes/twilight.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#141414` |
 | `text` | `#f7f7f7` |
@@ -720,9 +720,9 @@ ID: `verminal`
 
 ![Verminal](assets/themes/verminal.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `rgba(0, 0, 0, 0.85)` |
 | `text` | `#fff` |
@@ -747,9 +747,9 @@ ID: `vscode`
 
 ![VSCode](assets/themes/vscode.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#1E1E1E` |
 | `text` | `#D4D4D4` |
@@ -773,9 +773,9 @@ ID: `yeti`
 
 ![Yeti](assets/themes/yeti.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#ECEAE8` |
 | `text` | `#d1c9c0` |
@@ -801,9 +801,9 @@ ID: `zenburn`
 
 ![Zenburn](assets/themes/zenburn.png)
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 | `background` | `#3f3f3f` |
 | `text` | `#dcdccc` |

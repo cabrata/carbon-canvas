@@ -22,15 +22,15 @@ const anchor = s => s.toLowerCase().replace(/[^a-z0-9 -]/g, '').replace(/ /g, '-
 fs.mkdirSync(path.join(root, 'assets/themes'), { recursive: true })
 let md = `# Theme Preview
 
-Preview semua **${THEMES.length} tema** bawaan carbon-canvas. Semua gambar dirender dengan opsi default (font Hack, background default) dan \`language: 'javascript'\`.
+Previews of all **${THEMES.length} built-in themes** in carbon-canvas. Every image is rendered with the default options (Hack font, default background) and \`language: 'javascript'\`.
 
 \`\`\`js
 render(code, { theme: '<id>', language: 'javascript' })
 \`\`\`
 
-## Daftar
+## List
 
-| Nama | ID | Background |
+| Name | ID | Background |
 | --- | --- | --- |
 ${THEMES.map(t => `| [${t.name}](#${anchor(t.name)}) | \`${t.id}\` | \`${t.highlights.background}\` |`).join('\n')}
 
@@ -44,9 +44,9 @@ ID: \`${t.id}\`
 
 ![${t.name}](${file})
 
-<details><summary>Palet warna</summary>
+<details><summary>Color palette</summary>
 
-| Key | Warna |
+| Key | Color |
 | --- | --- |
 ${Object.entries(t.highlights).map(([k, v]) => `| \`${k}\` | \`${v}\` |`).join('\n')}
 

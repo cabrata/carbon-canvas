@@ -1,5 +1,7 @@
 # carbon-canvas
 
+[English](README.md) | **Bahasa Indonesia**
+
 Bikin gambar kode cantik ala [carbon.now.sh](https://carbon.now.sh) langsung dari **Node.js**, tanpa browser, tanpa Puppeteer, tanpa Chromium.
 
 Render pakai [`@napi-rs/canvas`](https://github.com/Brooooooklyn/canvas) (Skia, prebuilt, tanpa dependency sistem) dan syntax highlight pakai [`highlight.js`](https://highlightjs.org). Tema, ukuran layout, shadow, dan window controls diambil dari source code [carbon-app/carbon](https://github.com/carbon-app/carbon).
@@ -189,6 +191,7 @@ Key yang tidak diisi akan pakai warna `text`.
 - Belum ada word wrap, baris yang lebih lebar dari `maxWidth` akan terpotong.
 - Belum support background image dan watermark.
 - Hanya 3 font bawaan (Carbon punya 13), sisanya bisa ditambah lewat `registerFont`.
+- Tema yang di Carbon punya CSS tambahan (night-owl, nord, one-dark, one-light, synthwave-84, verminal) hanya memakai warna dasarnya, jadi bisa sedikit beda dari carbon.now.sh (misal efek glow synthwave tidak ada).
 
 ## Test
 
@@ -196,7 +199,7 @@ Key yang tidak diisi akan pakai warna `text`.
 npm test
 ```
 
-Menghasilkan contoh gambar di folder `out/`.
+Menghasilkan contoh gambar di folder `out/`. Untuk membuat ulang preview tema jalankan `npm run themes`.
 
 ## Kredit
 
